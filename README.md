@@ -1,6 +1,6 @@
 # Counter Workshop
 
-A workshop setup an "enterprisey" e.g. advanced version of the counter app.
+A workshop to setup an "enterprisey" e.g. advanced version of the counter app.
 
 ## Getting Started
 
