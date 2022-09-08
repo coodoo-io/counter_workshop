@@ -1,0 +1,74 @@
+image: cirrusci/flutter:3.3.0
+
+cache:
+  paths:
+    - /flutter/bin/cache/dart-sdk
+
+include:
+  - template: 'Workflows/Branch-Pipelines.gitlab-ci.yml'
+
+stages:
+  - check
+  - test
+  - build
+  - release
+
+# Check app for format and lint exceptions (fail fast)
+Check App:
+  stage: check
+  except:
+    - main
+  before_script:  
+    - flutter --version
+  script:
+    - make format
+    - make clean
+    - make lint
+
+# Check code quality
+code_quality:
+  stage: test
+  except:
+    - main
+  before_script:
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - flutter pub global activate dart_code_metrics
+  script:
+    - metrics lib -r codeclimate  > gl-code-quality-report.json
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
+# Run tests and report quality
+Test:
+  stage: test
+  except:
+    - main
+  before_script:
+    - export PATH="$PATH":"$HOME/.pub-cache/bin"
+    - flutter pub global activate junitreport
+  script:
+    - flutter test --machine --coverage | tojunit -o report.xml
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines\.*: \d+\.\d+\%/'
+  artifacts:
+    name: coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+    reports:
+      junit: report.xml
+
+# Build the app to check if release builds still work
+Build Android (.apk):
+  stage: build
+  except:
+    - main
+  script:
+    - make build-android-apk
+  dependencies:
+    - Check App
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - build-output/app.apk
