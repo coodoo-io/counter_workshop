@@ -1,8 +1,10 @@
-import 'package:counter_workshop/src/features/counter/counter.page.dart';
+import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
+import 'package:counter_workshop/src/feature/counter/presentation/counter.page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({required this.counterRepository, super.key});
+  final CounterRepository counterRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CounterPage(),
+      home: CounterPage(counterRepository: counterRepository),
     );
   }
 }

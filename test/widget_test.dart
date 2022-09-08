@@ -6,13 +6,18 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:counter_workshop/src/app.dart';
+import 'package:counter_workshop/src/feature/counter/data/datasource/remote/counter.api.dart';
+import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+    await tester.pumpWidget(
+      App(counterRepository: CounterRepository(counterDataSource: CounterAPI())),
+      const Duration(seconds: 1), // Should be using a Fake-/Mock-Implementation instead of slowing tests down
+    );
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

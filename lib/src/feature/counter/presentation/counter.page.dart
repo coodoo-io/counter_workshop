@@ -1,18 +1,26 @@
+import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
+import 'package:counter_workshop/src/feature/counter/presentation/counter.controller.dart';
 import 'package:flutter/material.dart';
 
 class CounterPage extends StatefulWidget {
-  const CounterPage({super.key});
+  const CounterPage({required this.counterRepository, super.key});
+  final CounterRepository counterRepository;
 
   @override
   State<CounterPage> createState() => _CounterPageState();
 }
 
 class _CounterPageState extends State<CounterPage> {
-  int _counter = 0;
+  late final CounterController counterController;
+  @override
+  void initState() {
+    counterController = CounterController(counterRepository: widget.counterRepository);
+    super.initState();
+  }
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      counterController.increment();
     });
   }
 
@@ -30,7 +38,7 @@ class _CounterPageState extends State<CounterPage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '${counterController.counter.value}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
