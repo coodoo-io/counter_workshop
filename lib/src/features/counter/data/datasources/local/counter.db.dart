@@ -1,9 +1,7 @@
-import 'package:counter_workshop/src/feature/counter/data/datasource/counter.datasource.dart';
-import 'package:counter_workshop/src/feature/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
 
 /// Locale app database like SqlLite that providers a [Counter]
-class CounterDBDataSource implements CounterDataSource {
-  @override
+class CounterDatabase {
   Future<Counter> fetchCounter(String id) {
     // TODO: implement fetchCounter
 

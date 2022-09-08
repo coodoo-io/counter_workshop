@@ -1,8 +1,8 @@
-import 'package:counter_workshop/src/feature/counter/data/datasource/counter.datasource.dart';
-import 'package:counter_workshop/src/feature/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
+import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
 
 /// Remote restful API that providers a [Counter]
-class CounterAPI implements CounterDataSource {
+class CounterFakeApi implements CounterApi {
   @override
   Future<Counter> fetchCounter(String id) {
     // simulate a network delay

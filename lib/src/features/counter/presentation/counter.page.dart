@@ -1,5 +1,5 @@
-import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
-import 'package:counter_workshop/src/feature/counter/presentation/counter.controller.dart';
+import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/presentation/counter.controller.dart';
 import 'package:flutter/material.dart';
 
 class CounterPage extends StatefulWidget {

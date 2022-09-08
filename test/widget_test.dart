@@ -6,8 +6,9 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:counter_workshop/src/app.dart';
-import 'package:counter_workshop/src/feature/counter/data/datasource/remote/counter.api.dart';
-import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/local/counter.db.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
+import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -15,8 +16,8 @@ void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      App(counterRepository: CounterRepository(counterDataSource: CounterAPI())),
-      const Duration(seconds: 1), // Should be using a Fake-/Mock-Implementation instead of slowing tests down
+      App(counterRepository: CounterRepository(counterApi: CounterFakeApi(), counterDatabase: CounterDatabase())),
+      const Duration(milliseconds: 500), // Because of FakeApi delay
     );
 
     // Verify that our counter starts at 0.

@@ -1,5 +1,5 @@
-import 'package:counter_workshop/src/feature/counter/data/repository/counter.repository.dart';
-import 'package:counter_workshop/src/feature/counter/presentation/counter.page.dart';
+import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/presentation/counter.page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
