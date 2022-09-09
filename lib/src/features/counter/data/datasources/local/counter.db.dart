@@ -2,7 +2,7 @@ import 'package:counter_workshop/src/features/counter/domain/counter.model.dart'
 
 /// Locale app database like SqlLite that providers a [CounterModel]
 class CounterDatabase {
-  CounterModel _counter = CounterModel(value: 0);
+  CounterModel _counter = const CounterModel();
 
   CounterModel getCounter() {
     return _counter;
