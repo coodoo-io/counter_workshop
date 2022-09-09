@@ -1,4 +1,3 @@
-import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/counter.controller.dart';
 import 'package:flutter/material.dart';
