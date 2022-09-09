@@ -24,6 +24,10 @@ Check App:
     - make format
     - make clean
     - make lint
+  artifacts:
+    untracked: true
+    paths:
+      - lib/
 
 # Check code quality
 code_quality:
@@ -44,8 +48,6 @@ Test:
   stage: test
   except:
     - main
-  dependencies:
-    - Check App
   before_script:
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
     - flutter pub global activate junitreport
@@ -69,8 +71,6 @@ Build Android (.apk):
     - main
   script:
     - make build-android-apk
-  dependencies:
-    - Check App
   artifacts:
     expire_in: 2 days
     paths:
