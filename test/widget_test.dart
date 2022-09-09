@@ -7,17 +7,37 @@
 
 import 'package:counter_workshop/src/app.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/local/counter.db.dart';
-import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockCounterApi extends Mock implements CounterApi {}
 
 void main() {
+  // Mocktail solution
+  final mockCounterApi = MockCounterApi();
+  // fetch
+  when(() => mockCounterApi.fetchCounter(any())).thenAnswer(
+    (_) => Future.value(
+      CounterResponseDto(
+        counterValue: 0,
+        sysId: '1',
+        createdAt: DateTime.now(),
+      ),
+    ),
+  );
+  // update
+  when(() => mockCounterApi.updateCounter(any(), any())).thenAnswer(
+    (_) => Future.value(),
+  );
+
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
-      App(counterRepository: CounterRepository(counterApi: CounterFakeApi(), counterDatabase: CounterDatabase())),
-      const Duration(milliseconds: 300), // Because of FakeApi delay
+      App(counterRepository: CounterRepository(counterApi: mockCounterApi, counterDatabase: CounterDatabase())),
     );
 
     // Verify that our counter starts at 0.
@@ -26,7 +46,7 @@ void main() {
 
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pumpAndSettle(const Duration(milliseconds: 300)); // Because of FakeApi delay
+    await tester.pump(); // Because of FakeApi delay
 
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
