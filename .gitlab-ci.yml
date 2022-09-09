@@ -50,7 +50,6 @@ Test:
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
     - flutter pub global activate junitreport
   script:
-    - make build-runner
     - flutter test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
