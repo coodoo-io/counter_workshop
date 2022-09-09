@@ -13,4 +13,11 @@ class CounterController {
     counterModel.value += 1;
     counterRepository.updateCounter(counterModel: counterModel);
   }
+
+  Future<void> decrement() async {
+    if (counterModel.value > 0) {
+      counterModel.value -= 1;
+      counterRepository.updateCounter(counterModel: counterModel);
+    }
+  }
 }

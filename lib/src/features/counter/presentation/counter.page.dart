@@ -26,7 +26,7 @@ class _CounterPageState extends State<CounterPage> {
 
   void _decrementCounter() {
     setState(() {
-      counterController.increment();
+      counterController.decrement();
     });
   }
 
