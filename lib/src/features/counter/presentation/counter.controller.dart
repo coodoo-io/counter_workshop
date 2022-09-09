@@ -6,7 +6,7 @@ class CounterController {
 
   final CounterRepository counterRepository;
 
-  Counter get counter {
+  CounterModel get counter {
     return counterRepository.getCounter();
   }
 
