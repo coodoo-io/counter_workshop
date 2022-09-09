@@ -44,8 +44,7 @@ Test:
   stage: test
   except:
     - main
-  dependencies:
-    - Check App
+  needs: [Check App]
   before_script:
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
     - flutter pub global activate junitreport
