@@ -4,11 +4,11 @@ import 'package:equatable/equatable.dart';
 class CounterModel extends Equatable {
   CounterModel({
     this.value = 0,
-    this.id,
+    this.id = '1',
   });
 
   /// technical counter id
-  String? id;
+  final String id;
 
   int value;
 

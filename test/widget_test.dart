@@ -17,7 +17,7 @@ void main() {
     // Build our app and trigger a frame.
     await tester.pumpWidget(
       App(counterRepository: CounterRepository(counterApi: CounterFakeApi(), counterDatabase: CounterDatabase())),
-      const Duration(milliseconds: 500), // Because of FakeApi delay
+      const Duration(milliseconds: 300), // Because of FakeApi delay
     );
 
     // Verify that our counter starts at 0.
@@ -26,7 +26,7 @@ void main() {
 
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    await tester.pumpAndSettle(const Duration(milliseconds: 300)); // Because of FakeApi delay
 
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);

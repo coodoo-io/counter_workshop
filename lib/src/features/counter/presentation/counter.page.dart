@@ -38,7 +38,7 @@ class _CounterPageState extends State<CounterPage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '${counterController.counter.value}',
+              '${counterController.counterModel.value}',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],

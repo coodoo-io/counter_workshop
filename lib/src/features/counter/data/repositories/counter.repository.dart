@@ -9,34 +9,32 @@ import 'dart:developer';
 
 class CounterRepository {
   CounterRepository({required this.counterApi, required this.counterDatabase}) {
+    // prefill repository Counter from API
     _fetchCounterData();
   }
 
   final CounterApi counterApi;
   final CounterDatabase counterDatabase;
+  final String defaultCounterId = '1'; // TODO: allow multiple counters
 
-  /// TODO Move to local storage
-
-  // prefill repository Counter from API
   Future<void> _fetchCounterData() async {
     log('retriving default counter');
-    CounterResponseDto counterResponseDto = await counterApi.fetchCounter('1');
+    CounterResponseDto counterResponseDto = await counterApi.fetchCounter(defaultCounterId);
 
-    // Map result to Model
-    CounterModel _counter =
-        CounterResponseConverter().toModel(counterResponseDto);
+    // map result to Model
+    CounterModel counterModel = CounterResponseConverter().toModel(counterResponseDto);
 
-    // store in database
-    counterDatabase.storeCounter(_counter);
+    // store model in database
+    counterDatabase.storeCounter(counterModel);
   }
 
   CounterModel getCounter() {
     return counterDatabase.getCounter();
   }
 
-  void updateCounter({required String id, required int value}) async {
-    log('update counter id by $value');
-    await counterApi.incrementCounter(id, value);
+  Future<void> updateCounter({required CounterModel counterModel}) async {
+    log('updating counter: ${counterModel.id} with value: $counterModel');
+    await counterApi.updateCounter(counterModel.id, counterModel.value);
     return;
   }
 }

@@ -2,15 +2,15 @@ import 'package:counter_workshop/src/features/counter/data/repositories/counter.
 import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
 
 class CounterController {
-  const CounterController({required this.counterRepository});
-
-  final CounterRepository counterRepository;
-
-  CounterModel get counter {
-    return counterRepository.getCounter();
+  CounterController({required this.counterRepository}) {
+    counterModel = counterRepository.getCounter();
   }
 
-  void increment() async {
-    counterRepository.increment(amount: 1);
+  final CounterRepository counterRepository;
+  CounterModel counterModel = CounterModel();
+
+  Future<void> increment() async {
+    counterModel.value += 1;
+    counterRepository.updateCounter(counterModel: counterModel);
   }
 }

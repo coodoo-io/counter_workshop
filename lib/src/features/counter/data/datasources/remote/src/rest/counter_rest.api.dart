@@ -15,7 +15,7 @@ class CounterRestApi implements CounterApi {
   }
 
   @override
-  Future<CounterResponseDto> incrementCounter(String id, int amount) {
+  Future<void> updateCounter(String id, int value) {
     // TODO: implement incrementCounter
     throw UnimplementedError();
   }
