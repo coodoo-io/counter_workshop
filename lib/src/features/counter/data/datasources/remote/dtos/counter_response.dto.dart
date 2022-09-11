@@ -1,13 +1,13 @@
-class CounterResponseDto {
-  CounterResponseDto({
-    required this.sysId,
-    required this.counterValue,
-    this.createdAt,
-    this.updatedAt,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String sysId;
-  final int counterValue;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+part 'counter_response.dto.freezed.dart';
+
+@freezed
+class CounterResponseDto with _$CounterResponseDto {
+  const factory CounterResponseDto({
+    required String sysId,
+    required int counterValue,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) = _CounterResponseDto;
 }

@@ -7,10 +7,10 @@ class CounterController {
   }
 
   final CounterRepository counterRepository;
-  CounterModel counterModel = CounterModel();
+  CounterModel counterModel = const CounterModel();
 
   Future<void> increment() async {
-    counterModel.value += 1;
+    counterModel = counterModel.copyWith(value: counterModel.value + 1);
     counterRepository.updateCounter(counterModel: counterModel);
   }
 }

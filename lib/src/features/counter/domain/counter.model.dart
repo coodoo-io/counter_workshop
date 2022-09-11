@@ -1,17 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-// ignore: must_be_immutable
-class CounterModel extends Equatable {
-  CounterModel({
-    this.value = 0,
-    this.id = '1',
-  });
+part 'counter.model.freezed.dart';
 
-  /// technical counter id
-  final String id;
-
-  int value;
-
-  @override
-  List<Object?> get props => [id, value];
+@freezed
+class CounterModel with _$CounterModel {
+  const factory CounterModel({
+    @Default('1') String id,
+    @Default(0) int value,
+  }) = _CounterModel;
 }

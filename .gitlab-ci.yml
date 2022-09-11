@@ -24,6 +24,10 @@ Check App:
     - make format
     - make clean
     - make lint
+  artifacts:
+    untracked: true
+    paths:
+      - lib/
 
 # Check code quality
 code_quality:
@@ -48,6 +52,7 @@ Test:
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
     - flutter pub global activate junitreport
   script:
+    - make clean
     - flutter test --machine --coverage | tojunit -o report.xml
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
@@ -66,8 +71,6 @@ Build Android (.apk):
     - main
   script:
     - make build-android-apk
-  dependencies:
-    - Check App
   artifacts:
     expire_in: 2 days
     paths:
