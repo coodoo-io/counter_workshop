@@ -9,7 +9,7 @@ abstract class CounterEvent extends Equatable {
 }
 
 /// Load data from repository
-class CounterFetchData extends CounterEvent {}
+class FetchCounterList extends CounterEvent {}
 
 /// Notifies bloc to increment state
 class CounterIncrementPressed extends CounterEvent {

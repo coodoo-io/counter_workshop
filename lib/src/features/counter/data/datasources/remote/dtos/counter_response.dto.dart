@@ -1,5 +1,7 @@
-class CounterResponseDto {
-  CounterResponseDto({
+import 'package:equatable/equatable.dart';
+
+class CounterResponseDto extends Equatable {
+  const CounterResponseDto({
     required this.sysId,
     required this.name,
     required this.counterValue,
@@ -20,4 +22,8 @@ class CounterResponseDto {
   final int? goalValue;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [sysId, counterValue];
 }

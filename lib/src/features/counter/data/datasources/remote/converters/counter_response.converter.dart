@@ -22,7 +22,7 @@ class CounterResponseConverter {
       counterValue: counter.value,
       stepSize: counter.stepSize,
       startValue: counter.value,
-      color: '#${(counter.color.value &  0xFFFFFF).toRadixString(16).padLeft(6, '0')}',
+      color: '#${(counter.color.value & 0xFFFFFF).toRadixString(16).padLeft(6, '0')}',
       goalValue: counter.goalValue,
     );
   }

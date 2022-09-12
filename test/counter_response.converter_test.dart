@@ -11,17 +11,17 @@ void main() {
     name: 'Kaffee',
     color: Color(0xffff3300),
   );
-  final dto = CounterResponseDto(
+  const dto = CounterResponseDto(
     counterValue: 1,
     sysId: '1',
     name: 'Kaffee',
   );
   group('Counter Response Converter', () {
-    test('should be convert to model', () {
+    test('should convert to model', () {
       expect(CounterResponseConverter().toModel(dto), model);
     });
 
-    test('should be convert to dto', () {
+    test('should convert to dto', () {
       expect(CounterResponseConverter().toDto(model), dto);
     });
   });

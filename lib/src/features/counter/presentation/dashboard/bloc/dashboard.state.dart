@@ -3,28 +3,28 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 @immutable
-abstract class CounterState extends Equatable {
+abstract class DashboardState extends Equatable {
   @override
   List<Object> get props => [];
 }
 
 /// Loading counter State
-class CounterLoadingState extends CounterState {}
+class DashboardLoadingState extends DashboardState {}
 
 /// Data counter State
-class CounterDataState extends CounterState {
-  final CounterModel counterModel;
-  CounterDataState(this.counterModel);
+class DashboardDataState extends DashboardState {
+  final List<CounterModel> counterList;
+  DashboardDataState(this.counterList);
 
   @override
-  List<Object> get props => [counterModel];
+  List<Object> get props => [counterList];
 }
 
 /// Error counter State
-class CounterErrorState extends CounterState {
+class DashboardErrorState extends DashboardState {
   final String error;
 
-  CounterErrorState(this.error);
+  DashboardErrorState(this.error);
 
   @override
   List<Object> get props => [error];

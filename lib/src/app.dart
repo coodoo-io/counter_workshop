@@ -1,6 +1,6 @@
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/presentation/view/counter.page.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/dashboard.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +30,7 @@ class AppView extends StatelessWidget {
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
-      home: const CounterPage(),
+      home: const DashboardPage(),
     );
   }
 }

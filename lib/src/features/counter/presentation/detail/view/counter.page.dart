@@ -1,9 +1,9 @@
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/presentation/bloc/counter.bloc.dart';
-import 'package:counter_workshop/src/features/counter/presentation/bloc/counter.event.dart';
-import 'package:counter_workshop/src/features/counter/presentation/bloc/counter.state.dart';
-import 'package:counter_workshop/src/features/counter/presentation/view/widgets/counter_text.widget.dart';
-import 'package:counter_workshop/src/features/counter/presentation/view/widgets/custom_circular_button.widget.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/counter.bloc.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/counter.event.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/counter.state.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/view/widgets/counter_text.widget.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class CounterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final counterRepository = context.read<CounterRepository>();
     return BlocProvider(
-      create: (_) => CounterBloc(counterRepository: counterRepository)..add(CounterFetchData()),
+      create: (_) => CounterBloc(counterRepository: counterRepository),
       child: const _CounterView(),
     );
   }
@@ -48,7 +48,7 @@ class _CounterView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CounterText(counterValue: state.counterModel.value),
+                  CounterText(counterValue: state.counterList[0].value),
                 ],
               ),
             );
@@ -79,13 +79,13 @@ class _CounterView extends StatelessWidget {
                 CustomCircularButton(
                   icon: Icons.remove,
                   onPressed: state is CounterDataState
-                      ? () => counterBloc.add(CounterDecrementPressed(state.counterModel))
+                      ? () => counterBloc.add(CounterDecrementPressed(state.counterList[0]))
                       : null,
                 ),
                 CustomCircularButton(
                   icon: Icons.add,
                   onPressed: state is CounterDataState
-                      ? () => counterBloc.add(CounterIncrementPressed(state.counterModel))
+                      ? () => counterBloc.add(CounterIncrementPressed(state.counterList[0]))
                       : null,
                 ),
               ],
