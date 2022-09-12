@@ -1,18 +1,15 @@
 import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class CounterEvent extends Equatable {
-  const CounterEvent();
+abstract class EditCounterEvent extends Equatable {
+  const EditCounterEvent();
 
   @override
   List<Object> get props => [];
 }
 
-/// Load data from repository
-class FetchCounterList extends CounterEvent {}
-
 /// Notifies bloc to increment state
-class CounterIncrementPressed extends CounterEvent {
+class CounterIncrementPressed extends EditCounterEvent {
   const CounterIncrementPressed(this.counterModel);
   final CounterModel counterModel;
 
@@ -21,7 +18,7 @@ class CounterIncrementPressed extends CounterEvent {
 }
 
 /// Notifies bloc to decrement state
-class CounterDecrementPressed extends CounterEvent {
+class CounterDecrementPressed extends EditCounterEvent {
   const CounterDecrementPressed(this.counterModel);
   final CounterModel counterModel;
 

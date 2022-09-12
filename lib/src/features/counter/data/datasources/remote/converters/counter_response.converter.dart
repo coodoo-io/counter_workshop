@@ -17,7 +17,7 @@ class CounterResponseConverter {
 
   CounterResponseDto toDto(CounterModel counter) {
     return CounterResponseDto(
-      sysId: counter.id,
+      sysId: counter.id!,
       name: counter.name,
       counterValue: counter.value,
       stepSize: counter.stepSize,

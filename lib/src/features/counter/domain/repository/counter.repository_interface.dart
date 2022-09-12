@@ -7,7 +7,9 @@ abstract class CounterRepositoryInterface {
 
   Future<CounterModel> getCounter({required String id});
 
-  Future<void> updateCounter({required CounterModel counterModel});
+  Future<CounterModel> createCounter({required CounterModel counterModel});
+
+  Future<void> updateCounter({required String id, required CounterModel counterModel});
 
   Future<void> deleteCounter({required String id});
 }

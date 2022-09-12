@@ -18,7 +18,7 @@ abstract class CounterApi {
   Future<void> updateCounter(String id, CounterResponseDto counterResponseDto);
 
   /// Create a new counter
-  Future<void> createCounter(CounterRequestDto counterRequestDto);
+  Future<CounterResponseDto> createCounter(CounterRequestDto counterRequestDto);
 
   /// Deletes a counter by a given counter [id]
   ///

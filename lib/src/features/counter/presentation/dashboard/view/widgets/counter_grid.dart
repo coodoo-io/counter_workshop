@@ -1,5 +1,5 @@
 import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
-import 'package:counter_workshop/src/features/counter/presentation/detail/view/counter.page.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/edit_counter.page.dart';
 import 'package:flutter/material.dart';
 
 class CounterGrid extends StatelessWidget {
@@ -23,15 +23,15 @@ class CounterGrid extends StatelessWidget {
       ),
       itemCount: counterList.length,
       itemBuilder: (BuildContext ctx, index) {
-        final counter = counterList[index];
+        final counterModel = counterList[index];
         return Card(
           child: InkWell(
-            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const CounterPage())),
+            onTap: () => Navigator.push(context, EditCounterPage.route(counterModel: counterModel)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${counter.value}', style: theme.textTheme.headlineLarge?.copyWith(fontSize: 60)),
-                Text(counter.name, style: theme.textTheme.caption),
+                Text('${counterModel.value}', style: theme.textTheme.headlineLarge?.copyWith(fontSize: 60)),
+                Text(counterModel.name, style: theme.textTheme.caption),
               ],
             ),
           ),

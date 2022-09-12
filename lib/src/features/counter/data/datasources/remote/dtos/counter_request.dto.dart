@@ -11,7 +11,7 @@ class CounterRequestDto {
     this.updatedAt,
   });
 
-  final String? sysId;
+  late final String? sysId;
   final String name;
   final int counterValue;
   final int startValue;

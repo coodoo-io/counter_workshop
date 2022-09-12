@@ -10,7 +10,7 @@ class CounterRestApi implements CounterApi {
   final http.Client client;
 
   @override
-  Future<void> createCounter(CounterRequestDto counterRequestDto) {
+  Future<CounterResponseDto> createCounter(CounterRequestDto counterRequestDto) {
     // TODO: implement createCounter
     throw UnimplementedError();
   }

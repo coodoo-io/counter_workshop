@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_request.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_response.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
@@ -34,14 +35,28 @@ class CounterRepository implements CounterRepositoryInterface {
   }
 
   @override
-  Future<void> updateCounter({required CounterModel counterModel}) async {
-    log('updating counter: ${counterModel.id} with value: $counterModel');
+  Future<CounterModel> createCounter({required CounterModel counterModel}) async {
+    log('creating new counter with name ${counterModel.name}');
+
+    // map model to dto
+    final dto = CounterRequestConverter().toDto(counterModel);
+
+    // store model in database
+    final response = await counterApi.createCounter(dto);
+
+    // map dto to model
+    return CounterResponseConverter().toModel(response);
+  }
+
+  @override
+  Future<void> updateCounter({required String id, required CounterModel counterModel}) async {
+    log('updating counter: $id with value: $counterModel');
 
     // map model to dto
     final dto = CounterResponseConverter().toDto(counterModel);
 
     // store model in database
-    await counterApi.updateCounter(counterModel.id, dto);
+    await counterApi.updateCounter(id, dto);
   }
 
   @override
