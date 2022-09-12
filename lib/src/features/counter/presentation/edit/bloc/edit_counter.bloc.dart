@@ -22,6 +22,7 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
     debugPrint('INCREMENT: ${state.counterModel.toString()}');
     final newCounterModel = state.counterModel.copyWith(value: state.counterModel.value + 1);
     emit(EditCounterState(counterModel: newCounterModel));
+    counterRepository.updateCounter(id: state.counterModel.id, counterModel: newCounterModel);
   }
 
   Future<void> _onDecrement(CounterDecrementPressed event, Emitter<EditCounterState> emit) async {

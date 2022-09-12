@@ -1,6 +1,5 @@
 class CounterRequestDto {
   CounterRequestDto({
-    this.sysId,
     required this.name,
     required this.counterValue,
     this.stepSize = 1,
@@ -11,7 +10,6 @@ class CounterRequestDto {
     this.updatedAt,
   });
 
-  late final String? sysId;
   final String name;
   final int counterValue;
   final int startValue;

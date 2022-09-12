@@ -23,6 +23,22 @@ class CounterResponseDto extends Equatable {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
+  CounterResponseDto copyWith({
+    String? sysId,
+  }) {
+    return CounterResponseDto(
+      sysId: sysId ?? this.sysId,
+      name: name,
+      counterValue: counterValue,
+      startValue: startValue,
+      stepSize: stepSize,
+      color: color,
+      goalValue: goalValue,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
+
   @override
   // TODO: implement props
   List<Object?> get props => [sysId, counterValue];

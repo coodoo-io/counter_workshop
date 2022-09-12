@@ -5,7 +5,6 @@ import 'package:counter_workshop/src/features/counter/domain/model/counter.model
 class CounterRequestConverter {
   CounterModel toModel(CounterRequestDto counterRequestDto) {
     return CounterModel(
-      id: counterRequestDto.sysId,
       name: counterRequestDto.name,
       value: counterRequestDto.counterValue,
       stepSize: counterRequestDto.stepSize,

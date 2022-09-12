@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class CounterModel extends Equatable {
   const CounterModel({
-    this.id,
+    this.id = '-1',
     required this.name,
     this.value = 0,
     this.stepSize = 1,
@@ -13,7 +13,7 @@ class CounterModel extends Equatable {
   });
 
   /// technical counter id
-  final String? id;
+  final String id;
   final String name;
   final int value;
   final int startValue;

@@ -60,8 +60,8 @@ class CounterFakeApi implements CounterApi {
 
   @override
   Future<CounterResponseDto> createCounter(CounterRequestDto counterRequestDto) {
-    counterRequestDto.sysId = '5';
-    final dto = counterRequestDto as CounterResponseDto;
+    var dto = counterRequestDto as CounterResponseDto;
+    dto.copyWith(sysId: '5');
     _counterList.add(dto);
     return Future.delayed(Duration(milliseconds: fakeApiDelay), () {
       return dto;
