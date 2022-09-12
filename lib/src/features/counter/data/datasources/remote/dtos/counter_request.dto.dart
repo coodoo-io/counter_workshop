@@ -1,6 +1,6 @@
-class CounterResponseDto {
-  CounterResponseDto({
-    required this.sysId,
+class CounterRequestDto {
+  CounterRequestDto({
+    this.sysId,
     required this.name,
     required this.counterValue,
     this.stepSize = 1,
@@ -11,7 +11,7 @@ class CounterResponseDto {
     this.updatedAt,
   });
 
-  final String sysId;
+  final String? sysId;
   final String name;
   final int counterValue;
   final int startValue;

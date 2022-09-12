@@ -1,44 +1,52 @@
 import 'dart:async';
 
-import 'package:counter_workshop/src/features/counter/data/datasources/local/counter.database.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_response.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
-import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 import 'dart:developer';
 
-class CounterRepository {
-  CounterRepository({required this.counterApi, required this.counterDatabase}) {
+import 'package:counter_workshop/src/features/counter/domain/repository/counter.repository_interface.dart';
+
+class CounterRepository implements CounterRepositoryInterface {
+  CounterRepository({required this.counterApi}) {
     // prefill repository Counter from API
-    _fetchCounterData();
+    getCounterList();
   }
 
   final CounterApi counterApi;
-  final CounterDatabase counterDatabase;
-  final String defaultCounterId = '1'; // TODO: allow multiple counters
 
-  Future<void> _fetchCounterData() async {
-    log('retriving default counter');
-    CounterResponseDto counterResponseDto = await counterApi.fetchCounter(defaultCounterId);
+  @override
+  Future<List<CounterModel>> getCounterList() async {
+    log('retriving counter list');
+    final List<CounterResponseDto> response = await counterApi.fetchAll();
 
-    // map result to Model
-    CounterModel counterModel = CounterResponseConverter().toModel(counterResponseDto);
-
-    // store model in database
-    await counterDatabase.storeCounter(counterModel);
+    // map result to model
+    return response.map((c) => CounterResponseConverter().toModel(c)).toList();
   }
 
-  Future<CounterModel> getCounter() async {
-    return await counterDatabase.getCounter();
+  @override
+  Future<CounterModel> getCounter({required String id}) async {
+    final CounterResponseDto response = await counterApi.fetchCounter(id);
+
+    // map result to model
+    return CounterResponseConverter().toModel(response);
   }
 
+  @override
   Future<void> updateCounter({required CounterModel counterModel}) async {
     log('updating counter: ${counterModel.id} with value: $counterModel');
 
-    // store model in database
-    await counterDatabase.storeCounter(counterModel);
+    // map model to dto
+    final dto = CounterResponseConverter().toDto(counterModel);
 
-    // store model in api
-    await counterApi.updateCounter(counterModel.id, counterModel.value);
+    // store model in database
+    await counterApi.updateCounter(counterModel.id, dto);
+  }
+
+  @override
+  Future<void> deleteCounter({required String id}) async {
+    log('deleting counter: $id');
+    await counterApi.deleteCounter(id);
   }
 }

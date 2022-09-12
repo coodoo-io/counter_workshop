@@ -1,4 +1,4 @@
-import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class CounterEvent extends Equatable {

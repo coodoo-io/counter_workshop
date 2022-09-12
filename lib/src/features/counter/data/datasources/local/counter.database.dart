@@ -1,8 +1,8 @@
-import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 
 /// Locale app database like SqlLite that providers a [CounterModel]
 class CounterDatabase {
-  CounterModel _counter = CounterModel(value: 0);
+  CounterModel _counter = const CounterModel(id: '1', value: 0, name: 'A');
   final int databaseDelay = 200;
 
   Future<CounterModel> getCounter() {

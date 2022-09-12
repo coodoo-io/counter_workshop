@@ -1,5 +1,5 @@
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
-import 'package:counter_workshop/src/features/counter/domain/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 
 class CounterResponseConverter {
   CounterModel toModel(CounterResponseDto counterResponseDto) {
