@@ -17,7 +17,6 @@ class EditCounterPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => EditCounterBloc(
         counterRepository: context.read<CounterRepository>(),
-        counterModel: counterModel,
         counterId: counterId,
       ),
       child: const CounterView(),

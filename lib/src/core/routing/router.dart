@@ -15,9 +15,9 @@ final router = GoRouter(
     GoRoute(
       path: '/counters/new',
       pageBuilder: (context, state) => const MaterialPage(
-            fullscreenDialog: true,
-            child: EditCounterPage(),
-          ),
+        fullscreenDialog: true,
+        child: EditCounterPage(),
+      ),
     ),
     GoRoute(
       path: '/counters/:id',
