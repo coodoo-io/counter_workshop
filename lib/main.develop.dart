@@ -7,12 +7,12 @@ import 'package:flutter_flavor/flutter_flavor.dart';
 
 void main() {
   FlavorConfig(
-      name: "DEVELOP",
+      name: 'DEVELOP',
       color: Colors.red,
       location: BannerLocation.bottomEnd,
-      variables: {"env": "DEVELOP", "API_URL": ""});
-  final CounterRepository counterRepository = CounterRepository(
-      counterApi: CounterFakeApi(), counterDatabase: CounterDatabase());
+      variables: {'env': 'DEVELOP', 'API_URL': ''});
+  final CounterRepository counterRepository =
+      CounterRepository(counterApi: CounterFakeApi(), counterDatabase: CounterDatabase());
   runApp(
     App(
       counterRepository: counterRepository,

@@ -16,8 +16,7 @@ class App extends StatelessWidget {
         child: MaterialApp(
       title: 'Counter Demo',
       theme: appTheme.light,
-      debugShowCheckedModeBanner:
-          FlavorConfig.instance.variables['env'] != 'PRODUCTION',
+      debugShowCheckedModeBanner: FlavorConfig.instance.variables['env'] != 'PRODUCTION',
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
       home: CounterPage(counterRepository: counterRepository),

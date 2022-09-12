@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
 
 void main() {
-  FlavorConfig(name: "", variables: {"env": "PRODUCTION", "API_URL": ""});
-  final CounterRepository counterRepository = CounterRepository(
-      counterApi: CounterFakeApi(), counterDatabase: CounterDatabase());
+  FlavorConfig(name: '', variables: {'env': 'PRODUCTION', 'API_URL': ''});
+  final CounterRepository counterRepository =
+      CounterRepository(counterApi: CounterFakeApi(), counterDatabase: CounterDatabase());
   runApp(
     App(
       counterRepository: counterRepository,
