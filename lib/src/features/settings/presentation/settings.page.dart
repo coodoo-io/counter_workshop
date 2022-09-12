@@ -12,7 +12,7 @@ class SettingsPage extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          "Make settings\n...",
+          'Make settings\n...',
           textAlign: TextAlign.center,
         ),
       ),
