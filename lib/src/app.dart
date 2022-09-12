@@ -1,7 +1,8 @@
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/presentation/counter.page.dart';
+import 'package:counter_workshop/src/features/counter/presentation/view/counter.page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
   const App({required this.counterRepository, super.key});
@@ -9,14 +10,27 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = AppTheme();
+    return RepositoryProvider.value(
+      value: counterRepository,
+      child: const AppView(),
+    );
+  }
+}
 
+class AppView extends StatelessWidget {
+  const AppView({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final appTheme = AppTheme();
     return MaterialApp(
       title: 'Counter Demo',
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
-      home: CounterPage(counterRepository: counterRepository),
+      home: const CounterPage(),
     );
   }
 }
