@@ -5,6 +5,7 @@ import 'package:counter_workshop/src/features/counter/presentation/view/widgets/
 import 'package:counter_workshop/src/features/counter/presentation/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 /// bloc
 class CounterPage extends StatelessWidget {
@@ -29,6 +30,12 @@ class _CounterView extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text('Counter Page'),
+        actions: [
+          IconButton(
+            onPressed: () => context.push('/settings'),
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: Center(
         child: Column(

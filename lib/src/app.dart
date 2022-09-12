@@ -1,11 +1,12 @@
+import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/presentation/view/counter.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
   const App({required this.counterRepository, super.key});
+
   final CounterRepository counterRepository;
 
   @override
@@ -25,12 +26,14 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Counter Demo',
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
-      home: const CounterPage(),
+      routeInformationProvider: router.routeInformationProvider,
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
     );
   }
 }
