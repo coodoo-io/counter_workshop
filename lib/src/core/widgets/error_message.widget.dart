@@ -14,8 +14,8 @@ class ErrorMessage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          'Es ist ein Fehler aufgetreten: ${error.toString()}',
-          style: const TextStyle(color: Colors.red),
+          'Es ist ein Fehler aufgetreten:\n${error.toString()}',
+          style: const TextStyle(color: Colors.red, height: 1.5),
         ),
       ),
     );

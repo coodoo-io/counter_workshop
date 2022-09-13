@@ -6,6 +6,7 @@ import 'package:counter_workshop/src/features/counter/presentation/dashboard/blo
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/widgets/counter_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 /// bloc
 class DashboardPage extends StatelessWidget {
@@ -48,6 +49,12 @@ class _DashboardView extends StatelessWidget {
           }
           // state unknown, fallback to empty or return a common error
           return const SizedBox();
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          context.go('/counters/new');
         },
       ),
     );

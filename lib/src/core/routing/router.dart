@@ -6,25 +6,27 @@ import 'package:go_router/go_router.dart';
 final router = GoRouter(
   urlPathStrategy: UrlPathStrategy.path,
   debugLogDiagnostics: true,
-  initialLocation: '/dashboard',
+  initialLocation: '/counters',
   routes: [
     GoRoute(
-      path: '/dashboard',
+      path: '/counters',
       builder: (context, state) => const DashboardPage(),
-    ),
-    GoRoute(
-      path: '/counters/new',
-      pageBuilder: (context, state) => const MaterialPage(
-        fullscreenDialog: true,
-        child: EditCounterPage(),
-      ),
-    ),
-    GoRoute(
-      path: '/counters/:id',
-      builder: (context, state) {
-        final counterId = state.params['id'];
-        return EditCounterPage(counterId: counterId);
-      },
+      routes: [
+        GoRoute(
+          path: 'new',
+          pageBuilder: (context, state) => const MaterialPage(
+            fullscreenDialog: true,
+            child: EditCounterPage(),
+          ),
+        ),
+        GoRoute(
+          path: ':id',
+          builder: (context, state) {
+            final counterId = state.params['id'];
+            return EditCounterPage(counterId: counterId!);
+          },
+        ),
+      ],
     ),
   ],
 );

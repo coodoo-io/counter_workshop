@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppTheme {
   // Light Mode
@@ -25,11 +26,11 @@ class AppTheme {
     final currentHeadlineColor = isLightMode ? headlineColor : headlineColorDark;
 
     return base.copyWith(
-      brightness: isLightMode ? Brightness.light : Brightness.dark,
       useMaterial3: true,
       primaryColor: currentPrimaryColor,
       scaffoldBackgroundColor: isLightMode ? scaffoldColor : scaffoldColorDark,
       appBarTheme: base.appBarTheme.copyWith(
+        systemOverlayStyle: isLightMode ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
         backgroundColor: Colors.transparent,
         foregroundColor: currentPrimaryColor,
         titleTextStyle: TextStyle(
@@ -38,6 +39,7 @@ class AppTheme {
           color: currentPrimaryColor,
         ),
       ),
+      floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(backgroundColor: primaryColor),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(width: 2.0, color: currentHeadlineColor),

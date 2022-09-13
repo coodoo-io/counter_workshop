@@ -1,7 +1,9 @@
+import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
+import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_text.widget.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +11,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// bloc
 class EditCounterPage extends StatelessWidget {
-  const EditCounterPage({this.counterId, this.counterModel, super.key});
+  const EditCounterPage({this.counterId, super.key});
   final String? counterId;
-  final CounterModel? counterModel;
   @override
   Widget build(BuildContext context) {
+    final bloc = EditCounterBloc(
+      counterRepository: context.read<CounterRepository>(),
+      counterId: counterId,
+    );
+    // Fetch data if counterId is provider
+    if (counterId != null) {
+      bloc.add(FetchCounter(counterId!));
+    }
+
     return BlocProvider(
-      create: (context) => EditCounterBloc(
-        counterRepository: context.read<CounterRepository>(),
-        counterId: counterId,
-      ),
+      create: (context) => bloc,
       child: const CounterView(),
     );
   }
@@ -32,37 +39,59 @@ class CounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final editCounterBloc = context.watch<EditCounterBloc>();
-    final counterModel = editCounterBloc.state.counterModel;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Counter Page'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CounterText(counterValue: counterModel.value),
-            Text(counterModel.name, style: theme.textTheme.caption),
-          ],
+        title: BlocBuilder<EditCounterBloc, EditCounterState>(
+          builder: (context, state) {
+            return state is EditCounterData ? Text(state.counterModel.name) : const Text('');
+          },
         ),
+      ),
+      body: BlocBuilder<EditCounterBloc, EditCounterState>(
+        builder: (context, state) {
+          if (state is EditCounterLoading) {
+            return const CustomLoadingIndicator();
+          } else if (state is EditCounterData) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CounterText(counterValue: state.counterModel.value),
+                  Text(state.counterModel.name, style: theme.textTheme.caption),
+                ],
+              ),
+            );
+          } else if (state is EditCounterError) {
+            return ErrorMessage(error: state.error);
+          }
+          return const SizedBox();
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            CustomCircularButton(
-              icon: Icons.remove,
-              onPressed: () => editCounterBloc.add(CounterDecrementPressed(counterModel)),
-            ),
-            CustomCircularButton(
-              icon: Icons.add,
-              onPressed: () => editCounterBloc.add(CounterIncrementPressed(counterModel)),
-            ),
-          ],
+        child: BlocBuilder<EditCounterBloc, EditCounterState>(
+          builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                CustomCircularButton(
+                  icon: Icons.remove,
+                  onPressed: state is EditCounterData
+                      ? () => editCounterBloc.add(CounterDecrementPressed(state.counterModel))
+                      : null,
+                ),
+                CustomCircularButton(
+                  icon: Icons.add,
+                  onPressed: state is EditCounterData
+                      ? () => editCounterBloc.add(CounterIncrementPressed(state.counterModel))
+                      : null,
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
