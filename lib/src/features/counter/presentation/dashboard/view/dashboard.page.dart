@@ -1,3 +1,4 @@
+import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
@@ -43,15 +44,7 @@ class _DashboardView extends StatelessWidget {
             return CounterGrid(counterList: state.counterList, columnCount: 2);
           } else if (state is DashboardErrorState) {
             // error
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Es ist ein Fehler aufgetreten: ${state.error}',
-                  style: const TextStyle(color: Colors.red),
-                ),
-              ),
-            );
+            return ErrorMessage(error: state.error);
           }
           // state unknown, fallback to empty or return a common error
           return const SizedBox();
