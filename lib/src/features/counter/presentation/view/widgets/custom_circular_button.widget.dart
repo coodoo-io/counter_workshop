@@ -12,6 +12,7 @@ class CustomCircularButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(15),
+        disabledForegroundColor: Colors.black12,
       ),
       onPressed: onPressed,
       child: Icon(

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:counter_workshop/src/features/counter/data/datasources/local/counter.db.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/local/counter.database.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_response.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
@@ -25,16 +25,20 @@ class CounterRepository {
     CounterModel counterModel = CounterResponseConverter().toModel(counterResponseDto);
 
     // store model in database
-    counterDatabase.storeCounter(counterModel);
+    await counterDatabase.storeCounter(counterModel);
   }
 
-  CounterModel getCounter() {
-    return counterDatabase.getCounter();
+  Future<CounterModel> getCounter() async {
+    return await counterDatabase.getCounter();
   }
 
   Future<void> updateCounter({required CounterModel counterModel}) async {
     log('updating counter: ${counterModel.id} with value: $counterModel');
+
+    // store model in database
+    await counterDatabase.storeCounter(counterModel);
+
+    // store model in api
     await counterApi.updateCounter(counterModel.id, counterModel.value);
-    return;
   }
 }
