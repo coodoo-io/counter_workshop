@@ -25,7 +25,7 @@ class EditCounterPage extends StatelessWidget {
           counterRepository: context.read<CounterRepository>(),
           counterId: counterId,
         ),
-        child: const EditCounterPage(),
+        child: EditCounterPage(counterId: counterId),
       ),
     );
   }
