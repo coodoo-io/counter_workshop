@@ -95,7 +95,3 @@ l10n:
 	flutter gen-l10n
 appicon:
 	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
-deeplink:
-	@printf "Android:\nadb shell am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d 'https://counter.de/counters/2'"
-	@printf "\n\n"
-	@printf "iOS:\nxcrun simctl openurl booted counter:///counters/2"
