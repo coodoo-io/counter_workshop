@@ -12,12 +12,24 @@ import 'package:counter_workshop/src/features/counter/presentation/edit/view/wid
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-/// bloc
 class EditCounterPage extends StatelessWidget {
   const EditCounterPage({this.counterId, super.key});
   final String? counterId;
+
+  static Route<void> route({String? counterId, bool fullscreen = false}) {
+    return MaterialPageRoute(
+      fullscreenDialog: fullscreen,
+      builder: (context) => BlocProvider(
+        create: (context) => EditCounterBloc(
+          counterRepository: context.read<CounterRepository>(),
+          counterId: counterId,
+        ),
+        child: const EditCounterPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final bloc = EditCounterBloc(

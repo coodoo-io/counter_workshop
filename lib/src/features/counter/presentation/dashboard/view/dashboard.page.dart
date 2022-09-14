@@ -2,9 +2,9 @@ import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.state.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/widgets/counter_grid.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/edit_counter.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 /// bloc
 class DashboardPage extends StatelessWidget {
@@ -38,7 +38,7 @@ class DashboardPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          context.go('/counters/new');
+          Navigator.push(context, EditCounterPage.route(fullscreen: true));
         },
       ),
     );

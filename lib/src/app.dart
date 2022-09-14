@@ -1,8 +1,8 @@
-import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/dashboard.page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,14 +45,12 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
-    return MaterialApp.router(
+    return MaterialApp(
       title: 'Counter Demo',
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
+      home: const DashboardPage(),
     );
   }
 }

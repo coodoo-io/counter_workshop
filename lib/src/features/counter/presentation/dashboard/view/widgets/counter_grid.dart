@@ -1,6 +1,6 @@
 import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/edit_counter.page.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CounterGrid extends StatelessWidget {
   const CounterGrid({
@@ -26,7 +26,7 @@ class CounterGrid extends StatelessWidget {
         final counterModel = counterList[index];
         return Card(
           child: InkWell(
-            onTap: () => context.push('/counters/${counterModel.id}'),
+            onTap: () => Navigator.push(context, EditCounterPage.route(counterId: counterModel.id)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
