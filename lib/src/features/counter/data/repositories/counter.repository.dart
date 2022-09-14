@@ -10,10 +10,7 @@ import 'dart:developer';
 import 'package:counter_workshop/src/features/counter/domain/repository/counter.repository_interface.dart';
 
 class CounterRepository implements CounterRepositoryInterface {
-  CounterRepository({required this.counterApi}) {
-    // prefill repository Counter from API
-    getCounterList();
-  }
+  const CounterRepository({required this.counterApi});
 
   final CounterApi counterApi;
 
