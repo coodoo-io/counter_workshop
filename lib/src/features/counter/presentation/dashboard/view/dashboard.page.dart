@@ -1,7 +1,5 @@
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
-import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
-import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.state.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/widgets/counter_grid.dart';
 import 'package:flutter/material.dart';
@@ -11,20 +9,6 @@ import 'package:go_router/go_router.dart';
 /// bloc
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final counterRepository = context.read<CounterRepository>();
-    return BlocProvider(
-      create: (_) => DashboardBloc(counterRepository: counterRepository)..add(FetchCounterList()),
-      child: const _DashboardView(),
-    );
-  }
-}
-
-/// actual counter page
-class _DashboardView extends StatelessWidget {
-  const _DashboardView();
 
   @override
   Widget build(BuildContext context) {

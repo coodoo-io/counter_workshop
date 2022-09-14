@@ -1,19 +1,38 @@
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({required this.counterRepository, super.key});
 
   final CounterRepository counterRepository;
 
   @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  late final DashboardBloc dashboardBloc;
+
+  @override
+  void initState() {
+    dashboardBloc = DashboardBloc(counterRepository: widget.counterRepository);
+    dashboardBloc.add(FetchCounterList());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return RepositoryProvider.value(
-      value: counterRepository,
-      child: const AppView(),
+      value: widget.counterRepository,
+      child: BlocProvider.value(
+        value: dashboardBloc,
+        child: const AppView(),
+      ),
     );
   }
 }

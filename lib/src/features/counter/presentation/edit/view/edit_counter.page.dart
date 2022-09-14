@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
@@ -8,6 +12,7 @@ import 'package:counter_workshop/src/features/counter/presentation/edit/view/wid
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 /// bloc
 class EditCounterPage extends StatelessWidget {
@@ -49,7 +54,23 @@ class CounterView extends StatelessWidget {
           },
         ),
       ),
-      body: BlocBuilder<EditCounterBloc, EditCounterState>(
+      body: BlocConsumer<EditCounterBloc, EditCounterState>(
+        listenWhen: (previous, current) {
+          if (previous is EditCounterData && current is EditCounterData) {
+            if (previous.counterModel.value != current.counterModel.value) {
+              return true;
+            }
+          }
+          return false;
+        },
+        listener: (context, state) {
+          if (state is EditCounterData) {
+            // Calling DashboardBloc (MasterPage) from EditCounterBloc (DetailPage)
+            log('EditBlocListener: ${state.counterModel.value}');
+            final dashboardBloc = context.read<DashboardBloc>();
+            dashboardBloc.add(FetchCounterList());
+          }
+        },
         builder: (context, state) {
           if (state is EditCounterLoading) {
             return const CustomLoadingIndicator();
