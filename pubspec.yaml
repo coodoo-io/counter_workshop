@@ -11,7 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
   http: ^0.13.5
@@ -27,7 +29,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
+  generate: true # Enable generation of localized Strings from arb files
+  
   fonts:
     - family: VarelaRound
       fonts:
