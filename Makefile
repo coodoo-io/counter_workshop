@@ -95,10 +95,3 @@ l10n:
 	flutter gen-l10n
 appicon:
 	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
-deeplink:
-	@printf "Android:\nadb shell am start -a android.intent.action.VIEW -c andrmoid.intent.category.BROWSABLE -d de.coodoo.counter://settings"
-	@printf "\n\n"
-	@printf "iOS:\nxcrun simctl openurl booted de.coodoo.counter://settings"
-
-
-
