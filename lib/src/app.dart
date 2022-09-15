@@ -55,12 +55,7 @@ class AppView extends StatelessWidget {
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
   }
