@@ -61,6 +61,7 @@ class AppView extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
