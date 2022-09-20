@@ -1,5 +1,6 @@
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/dashboard.page.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/edit_counter.page.dart';
+import 'package:counter_workshop/src/features/settings/presentation/settings.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -28,5 +29,9 @@ final router = GoRouter(
         ),
       ],
     ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsPage(),
+    )
   ],
 );

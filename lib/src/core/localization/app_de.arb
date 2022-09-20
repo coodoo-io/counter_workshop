@@ -1,4 +1,7 @@
 {
     "@@locale": "de",
-    "appTitle": "Zähler"
+    "appTitle": "Zähler",
+    "settings": "Einstellungen",
+    "german": "Deutsch",
+    "english": "Englisch"
 }

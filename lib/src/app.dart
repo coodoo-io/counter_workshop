@@ -14,9 +14,13 @@ class App extends StatefulWidget {
 
   @override
   State<App> createState() => _AppState();
+
+  // ignore: library_private_types_in_public_api
+  static _AppState of(BuildContext context) => context.findAncestorStateOfType<_AppState>()!;
 }
 
 class _AppState extends State<App> {
+  Locale? _locale;
   late final DashboardBloc dashboardBloc;
 
   @override
@@ -32,22 +36,30 @@ class _AppState extends State<App> {
       value: widget.counterRepository,
       child: BlocProvider.value(
         value: dashboardBloc,
-        child: const AppView(),
+        child: AppView(locale: _locale),
       ),
     );
+  }
+
+  void setLocale(Locale locale) {
+    setState(() => _locale = locale);
   }
 }
 
 class AppView extends StatelessWidget {
   const AppView({
     Key? key,
+    required this.locale,
   }) : super(key: key);
+
+  final Locale? locale;
 
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
     return MaterialApp.router(
       title: 'Counter Demo',
+      locale: locale,
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,

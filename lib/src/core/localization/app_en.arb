@@ -3,5 +3,17 @@
     "appTitle": "Counter",
     "@appTitle": {
       "description": "Name of the app"
+    },
+    "settings": "Settings",
+    "@settings": {
+      "description": "Name of the settings page"
+    },
+    "german": "German",
+    "@german": {
+      "description": "Language name: German"
+    },
+    "english": "English",
+    "@english": {
+      "description": "Language name: English"
     }
 }
