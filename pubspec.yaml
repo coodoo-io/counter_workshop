@@ -26,6 +26,32 @@ dev_dependencies:
   build_runner: ^2.2.0
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.8
+  flutter_flavorizr: ^2.1.4
+
+flavorizr:
+  app:
+    android:
+      flavorDimensions: "flavor-type"
+    ios:
+
+  flavors:
+    stage:
+      app:
+        name: "STAGE Clicker"
+      android:
+        applicationId: "de.coodoo.clicker_stage"
+      ios:
+        bundleId: "de.coodoo.clicker_stage"
+
+    dev:
+      app:
+        name: "DEV Clicker"
+
+      android:
+        applicationId: "de.coodoo.clicker_dev"
+      ios:
+        bundleId: "de.coodoo.clicker_dev"
+
 
 flutter:
   uses-material-design: true

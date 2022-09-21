@@ -1,3 +1,4 @@
+import 'package:counter_workshop/flavors.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.state.dart';
@@ -15,7 +16,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Counter Page'),
+        title: Text('${F.name} Page'),
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
