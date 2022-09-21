@@ -51,6 +51,13 @@ clean:
 	flutter pub get
 	make build-runner
 
+
+# App-icon & Splashscreen
+build-splashscreen:
+    flutter pub run flutter_native_splash:create
+build-appicon:
+	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
+
 # Export Archives .ipa, .aab and .apk
 build-ios:
 	@echo "Build iOS"
