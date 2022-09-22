@@ -16,7 +16,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text('${F.name} Page'),
+        title: Text('${F.title} Page'),
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {

@@ -4,11 +4,11 @@
 
 # Dev Builds
 run-dev:
-	flutter run
+	flutter run --flavor dev -t lib/main_dev.dart
 run-stage:
-	flutter run
+	flutter run --flavor stage -t lib/main_stage.dart
 run-prod:
-	flutter run
+	flutter run --flavor prod -t lib/main_prod.dart
 
 # Profile Builds
 run-dev-profile:
@@ -55,8 +55,12 @@ clean:
 # App-icon & Splashscreen
 build-splashscreen:
 	flutter pub run flutter_native_splash:create
-build-appicon:
-	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons.yaml
+build-appicons:
+	flutter pub run flutter_launcher_icons:main -f flutter_launcher_icons*
+
+# Flavor
+build-flavorizr:
+	flutter pub run flutter_flavorizr
 
 # Export Archives .ipa, .aab and .apk
 build-ios:

@@ -35,6 +35,14 @@ flavorizr:
     ios:
 
   flavors:
+    prod:
+      app:
+        name: "Clicker"
+      android:
+        applicationId: "de.coodoo.clicker"
+      ios:
+        bundleId: "de.coodoo.clicker"
+
     stage:
       app:
         name: "STAGE Clicker"

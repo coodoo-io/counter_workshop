@@ -31,6 +31,11 @@ android {
     flavorDimensions "flavor-type"
 
     productFlavors {
+        prod {
+            dimension "flavor-type"
+            applicationId "de.coodoo.clicker"
+            resValue "string", "app_name", "Clicker"
+        }
         stage {
             dimension "flavor-type"
             applicationId "de.coodoo.clicker_stage"
