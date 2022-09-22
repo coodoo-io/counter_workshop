@@ -21,5 +21,4 @@ class F {
         return 'title';
     }
   }
-
 }
