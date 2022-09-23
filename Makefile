@@ -85,20 +85,20 @@ build-android:
 	@echo "Build Store App Bundle"
 	make clean
 	flutter build appbundle --flavor prod -t lib/main_prod.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/bundle/release/app-release.aab build-output/
-	mv build-output/app-release.aab build-output/app.aab
+	cp build/app/outputs/bundle/podRelease/app-prod-release.aab build-output/
+	mv build-output/app-prod-release.aab build-output/app.aab
 build-android-stage:
 	@echo "Build Store App Bundle"
 	make clean
 	flutter build appbundle --flavor stage -t lib/main_stage.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/bundle/release/app-release.aab build-output/
-	mv build-output/app-release.aab build-output/app.aab
+	cp build/app/outputs/bundle/stageRelease/app-stage-release.aab build-output/
+	mv build-output/app-stage-release.aab build-output/app.aab
 build-android-dev:
 	@echo "Build Store App Bundle"
 	make clean
 	flutter build appbundle --flavor dev -t lib/main_dev.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/bundle/release/app-release.aab build-output/
-	mv build-output/app-release.aab build-output/app.aab
+	cp build/app/outputs/bundle/devRelease/app-dev-release.aab build-output/
+	mv build-output/app-dev-release.aab build-output/app.aab
 build-android-analyze:
 	@echo "Build Android analyze"
 	flutter build appbundle --analyze-size --suppress-analytics
@@ -106,20 +106,20 @@ build-android-apk:
 	@echo "Build self-distribution .apk"
 	make clean
 	flutter build apk --flavor prod -t lib/main_prod.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/apk/release/app-release.apk build-output/
-	mv build-output/app-release.apk build-output/app.apk
+	cp build/app/outputs/flutter-apk/app-prod-release.apk build-output/
+	mv build-output/app-prod-release.apk build-output/app.apk
 build-android-apk-stage:
 	@echo "Build self-distribution .apk"
 	make clean
 	flutter build apk --flavor stage -t lib/main_stage.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/apk/release/app-release.apk build-output/
-	mv build-output/app-release.apk build-output/app.apk
+	cp build/app/outputs/flutter-apk/app-stage-release.apk build-output/
+	mv build-output/app-stage-release.apk build-output/app.apk
 build-android-apk-dev:
 	@echo "Build self-distribution .apk"
 	make clean
 	flutter build apk --flavor dev -t lib/main_dev.dart --obfuscate --split-debug-info=./build-output/debug/
-	cp build/app/outputs/apk/release/app-release.apk build-output/
-	mv build-output/app-release.apk build-output/app.apk
+	cp build/app/outputs/flutter-apk/app-dev-release.apk build-output/
+	mv build-output/app-dev-release.apk build-output/app.apk
 
 
 # Release Archive to AppStore/PlayStore
