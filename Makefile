@@ -66,7 +66,17 @@ build-flavorizr:
 build-ios:
 	@echo "Build iOS"
 	make clean
-	flutter build ipa --obfuscate --split-debug-info=./build-output/debug/ --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --suppress-analytics
+	flutter build ipa --flavor prod -t lib/main_prod.dart --obfuscate --split-debug-info=./build-output/debug/ --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --suppress-analytics
+	cp build/ios/ipa/app.ipa build-output/app.ipa
+build-ios-stage:
+	@echo "Build iOS"
+	make clean
+	flutter build ipa --flavor stage -t lib/main_stage.dart --obfuscate --split-debug-info=./build-output/debug/ --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --suppress-analytics
+	cp build/ios/ipa/app.ipa build-output/app.ipa
+build-ios-dev:
+	@echo "Build iOS"
+	make clean
+	flutter build ipa --flavor dev -t lib/main_dev.dart --obfuscate --split-debug-info=./build-output/debug/ --tree-shake-icons --export-options-plist=ios/ios-export-options.plist --suppress-analytics
 	cp build/ios/ipa/app.ipa build-output/app.ipa
 build-ios-analyze:
 	@echo "Build iOS analyze"
@@ -74,7 +84,19 @@ build-ios-analyze:
 build-android:
 	@echo "Build Store App Bundle"
 	make clean
-	flutter build appbundle --obfuscate --split-debug-info=./build-output/debug/
+	flutter build appbundle --flavor prod -t lib/main_prod.dart --obfuscate --split-debug-info=./build-output/debug/
+	cp build/app/outputs/bundle/release/app-release.aab build-output/
+	mv build-output/app-release.aab build-output/app.aab
+build-android-stage:
+	@echo "Build Store App Bundle"
+	make clean
+	flutter build appbundle --flavor stage -t lib/main_stage.dart --obfuscate --split-debug-info=./build-output/debug/
+	cp build/app/outputs/bundle/release/app-release.aab build-output/
+	mv build-output/app-release.aab build-output/app.aab
+build-android-dev:
+	@echo "Build Store App Bundle"
+	make clean
+	flutter build appbundle --flavor dev -t lib/main_dev.dart --obfuscate --split-debug-info=./build-output/debug/
 	cp build/app/outputs/bundle/release/app-release.aab build-output/
 	mv build-output/app-release.aab build-output/app.aab
 build-android-analyze:
@@ -83,9 +105,22 @@ build-android-analyze:
 build-android-apk:
 	@echo "Build self-distribution .apk"
 	make clean
-	flutter build apk --obfuscate --split-debug-info=./build-output/debug/
+	flutter build apk --flavor prod -t lib/main_prod.dart --obfuscate --split-debug-info=./build-output/debug/
 	cp build/app/outputs/apk/release/app-release.apk build-output/
 	mv build-output/app-release.apk build-output/app.apk
+build-android-apk-stage:
+	@echo "Build self-distribution .apk"
+	make clean
+	flutter build apk --flavor stage -t lib/main_stage.dart --obfuscate --split-debug-info=./build-output/debug/
+	cp build/app/outputs/apk/release/app-release.apk build-output/
+	mv build-output/app-release.apk build-output/app.apk
+build-android-apk-dev:
+	@echo "Build self-distribution .apk"
+	make clean
+	flutter build apk --flavor dev -t lib/main_dev.dart --obfuscate --split-debug-info=./build-output/debug/
+	cp build/app/outputs/apk/release/app-release.apk build-output/
+	mv build-output/app-release.apk build-output/app.apk
+
 
 # Release Archive to AppStore/PlayStore
 release-ios:
