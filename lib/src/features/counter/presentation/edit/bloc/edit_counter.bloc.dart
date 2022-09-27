@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:counter_workshop/src/core/logger/init_logger.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
@@ -26,14 +28,14 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
   }
 
   Future<void> _onIncrement(CounterIncrementPressed event, Emitter<EditCounterState> emit) async {
-    debugPrint('INCREMENT: ${event.counterModel.toString()}');
+    appLogger.info('INCREMENT: ${event.counterModel.toString()}');
     final newCounterModel = event.counterModel.copyWith(value: event.counterModel.value + 1);
     emit(EditCounterData(newCounterModel));
     await counterRepository.updateCounter(id: event.counterModel.id, counterModel: newCounterModel);
   }
 
   Future<void> _onDecrement(CounterDecrementPressed event, Emitter<EditCounterState> emit) async {
-    debugPrint('DECREMENT: ${event.counterModel.toString()}');
+    appLogger.fine('DECREMENT: ${event.counterModel.toString()}');
 
     if (event.counterModel.value == 0) {
       return;

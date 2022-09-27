@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
   urlPathStrategy: UrlPathStrategy.path,
-  debugLogDiagnostics: true,
+  debugLogDiagnostics: false,
   initialLocation: '/counters',
   routes: [
     GoRoute(

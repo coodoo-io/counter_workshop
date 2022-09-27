@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:counter_workshop/src/core/logger/init_logger.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_request.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_response.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/dtos/counter_response.dto.dart';
 import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
-import 'dart:developer';
 
 import 'package:counter_workshop/src/features/counter/domain/repository/counter.repository_interface.dart';
 
@@ -16,7 +16,7 @@ class CounterRepository implements CounterRepositoryInterface {
 
   @override
   Future<List<CounterModel>> getCounterList() async {
-    log('retriving counter list');
+    appLogger.info('retriving counter list');
     final List<CounterResponseDto> response = await counterApi.fetchAll();
 
     // map result to model
@@ -33,7 +33,7 @@ class CounterRepository implements CounterRepositoryInterface {
 
   @override
   Future<CounterModel> createCounter({required CounterModel counterModel}) async {
-    log('creating new counter with name ${counterModel.name}');
+    appLogger.info('creating new counter with name ${counterModel.name}');
 
     // map model to dto
     final dto = CounterRequestConverter().toDto(counterModel);
@@ -47,7 +47,7 @@ class CounterRepository implements CounterRepositoryInterface {
 
   @override
   Future<void> updateCounter({required String id, required CounterModel counterModel}) async {
-    log('updating counter: $id with value: $counterModel');
+    appLogger.info('updating counter: $id with value: $counterModel');
 
     // map model to dto
     final dto = CounterResponseConverter().toDto(counterModel);
@@ -58,7 +58,7 @@ class CounterRepository implements CounterRepositoryInterface {
 
   @override
   Future<void> deleteCounter({required String id}) async {
-    log('deleting counter: $id');
+    appLogger.info('deleting counter: $id');
     await counterApi.deleteCounter(id);
   }
 }
