@@ -3,9 +3,7 @@ import 'package:counter_workshop/src/core/logger/log_formatters.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart';
 
-const String appTitle = 'CounterWorkshop';
-
-final appLogger = Logger(appTitle);
+final appLogger = Logger('CounterWorkshop');
 
 class AppLogger {
   // ignore: unused_field
@@ -41,12 +39,12 @@ class AppLogger {
     //String outputColor = '';
 
     if (kDebugMode) {
-      recordStackTraceAtLevel = Level.ALL;
+      recordStackTraceAtLevel = Level.WARNING;
       // Logger.root.onRecord.listen((record) {
       //   outputColor = defineOutputColor(record.level);
       //   if (record.error != null && record.stackTrace != null) {
       //     log(
-      //       '$outputColor Level: ${record.level.name} \nLoggerName: ${record.loggerName} \nTime: ${record.time} \nMessage: ${record.message} \nError: ${record.error} \nException: ${record.stackTrace} \x1B[0m',
+      //       '${outputColor}Level: ${record.level.name} \nLoggerName: ${record.loggerName} \nTime: ${record.time} \nMessage: ${record.message} \nError: ${record.error} \nException: ${record.stackTrace} \x1B[0m',
       //       level: record.level.value,
       //       name: record.loggerName,
       //       time: record.time,

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:counter_workshop/src/core/logger/init_logger.dart';
+import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_request.converter.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/counter.api.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/converters/counter_response.converter.dart';

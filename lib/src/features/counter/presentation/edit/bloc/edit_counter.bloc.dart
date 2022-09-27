@@ -1,11 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
-
-import 'package:counter_workshop/src/core/logger/init_logger.dart';
+import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
@@ -35,7 +32,7 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
   }
 
   Future<void> _onDecrement(CounterDecrementPressed event, Emitter<EditCounterState> emit) async {
-    appLogger.fine('DECREMENT: ${event.counterModel.toString()}');
+    appLogger.info('DECREMENT: ${event.counterModel.toString()}');
 
     if (event.counterModel.value == 0) {
       return;

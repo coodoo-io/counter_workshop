@@ -1,6 +1,4 @@
-import 'dart:developer';
-
-import 'package:counter_workshop/src/core/logger/init_logger.dart';
+import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
