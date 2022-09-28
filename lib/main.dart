@@ -5,11 +5,11 @@ import 'package:counter_workshop/src/features/counter/data/repositories/counter.
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/intl_standalone.dart' if (dart.library.html) 'package:intl/intl_browser.dart';
+import 'package:logging/logging.dart';
 
 Future<void> main() async {
   Intl.systemLocale = await findSystemLocale();
-  AppLogger();
-  appLogger.info('App Started');
+  AppLogger(level: Level.WARNING);
   final CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
 
   runApp(

@@ -4,12 +4,12 @@ import 'package:counter_workshop/src/core/logger/log_formatters.dart';
 import 'package:logging/logging.dart';
 import 'package:logging_appenders/logging_appenders.dart';
 
-class AppDevLogAppender extends BaseLogAppender {
-  // void Function(Object line)? printer;
+class ConsoleLogAppender extends BaseLogAppender {
+  void Function(Object line)? printer;
 
-  AppDevLogAppender({LogRecordFormatter? formatter}) : super(formatter ?? defaultLogRecordFormatter());
+  ConsoleLogAppender({LogRecordFormatter? formatter}) : super(formatter ?? defaultDebugConsoleLogFormatter());
 
-  AppDevLogAppender setupLogging({Level level = Level.ALL, Level stderrLevel = Level.OFF}) {
+  ConsoleLogAppender setupLogging({Level level = Level.ALL, Level stderrLevel = Level.OFF}) {
     Logger.root.clearListeners();
     Logger.root.level = level;
 
@@ -22,30 +22,29 @@ class AppDevLogAppender extends BaseLogAppender {
   }
 }
 
-AppDevLogAppender defaultLogAppender({LogRecordFormatter? formatter, Level? stderrLevel}) {
-  return AppDevLogAppender(formatter: formatter);
+ConsoleLogAppender defaultLogAppender({LogRecordFormatter? formatter, Level? stderrLevel}) {
+  return ConsoleLogAppender(formatter: formatter);
 }
 
-// Realse Appender ####################################################################################################
-
-class AppReleaseLogAppender extends BaseLogAppender {
+class FileLogAppender extends RotatingFileAppender {
   void Function(Object line)? printer;
 
-  AppReleaseLogAppender({LogRecordFormatter? formatter}) : super(formatter ?? defaultReleaseLogRecordFormatter());
+  FileLogAppender({LogRecordFormatter? formatter})
+      : super(baseFilePath: '/counter_workshop_logs', formatter: formatter);
 
-  AppReleaseLogAppender setupLogging({Level level = Level.ALL, Level stderrLevel = Level.OFF}) {
+  FileLogAppender setupLogging({Level level = Level.ALL, Level stderrLevel = Level.OFF}) {
     Logger.root.clearListeners();
     Logger.root.level = level;
 
-    return defaultReleaseLogAppender(stderrLevel: stderrLevel)..attachToLogger(Logger.root);
+    return fileLogAppender(stderrLevel: stderrLevel)..attachToLogger(Logger.root);
   }
 
   @override
   void handle(LogRecord record) {
-    log(formatter.format(record));
+    //log(formatter.format(record));
   }
 }
 
-AppReleaseLogAppender defaultReleaseLogAppender({LogRecordFormatter? formatter, Level? stderrLevel}) {
-  return AppReleaseLogAppender(formatter: formatter);
+FileLogAppender fileLogAppender({LogRecordFormatter? formatter, Level? stderrLevel}) {
+  return FileLogAppender(formatter: formatter);
 }
