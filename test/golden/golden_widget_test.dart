@@ -1,7 +1,6 @@
 import 'package:counter_workshop/src/app.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
-import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/widgets/counter_grid.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
