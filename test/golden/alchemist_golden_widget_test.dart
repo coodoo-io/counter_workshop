@@ -5,23 +5,16 @@ import 'package:counter_workshop/src/features/counter/data/repositories/counter.
 
 import 'package:flutter/material.dart';
 
-// ignore: depend_on_referenced_packages
-
 void main() {
   goldenTest(
     'Alchemist Test',
     fileName: 'dashboard',
-    builder: () => GoldenTestScenario(
-      name: 'Dashboard',
-      constraints: const BoxConstraints(
-        maxWidth: 600,
-        maxHeight: 600,
-      ),
-      child: App(
-        counterRepository: CounterRepository(
-          counterApi: CounterFakeApi(),
-        ),
-      ),
-    ),
+    builder: () {
+      return GoldenTestScenario(
+        name: 'Dashboard',
+        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 600),
+        child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
+      );
+    },
   );
 }
