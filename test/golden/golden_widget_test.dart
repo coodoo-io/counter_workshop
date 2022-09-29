@@ -1,6 +1,7 @@
 import 'package:counter_workshop/src/app.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/widgets/counter_grid.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 // ignore: depend_on_referenced_packages
@@ -8,20 +9,20 @@ import 'package:file/local.dart';
 import 'package:platform/platform.dart';
 
 void main() {
-  // final sizeVariant = ValueVariant<Size>({
-  //   Size(300, 300),
-  //   Size(600, 600),
-  //   Size(1000, 600),
-  // });
-
+  final sizeVariant = ValueVariant<Size>({
+    const Size(300, 300),
+    const Size(600, 600),
+    const Size(1000, 1000),
+  });
   testWidgets(
     'Golden test',
     (WidgetTester tester) async {
-      //GoldenRobot r = GoldenRobot(tester);
+      // Set different Sizes ###########################################################################################
+      Size currentSize = sizeVariant.currentValue!;
 
-      // Set different screen sizes for the image and test
-      //final currentSize = sizeVariant.currentValue!;
-      //await r.setSurfaceSize(currentSize);
+      await tester.binding.setSurfaceSize(currentSize);
+      tester.binding.window.physicalSizeTestValue = currentSize;
+      tester.binding.window.devicePixelRatioTestValue = 1.0;
 
       // Load Icons ########################################################################################################
       const fs = LocalFileSystem();
@@ -42,23 +43,25 @@ void main() {
       final iconLoader = FontLoader('MaterialIcons')..addFont(bytes);
       await iconLoader.load();
 
-// Load Font ###########################################################################################################
+      // Load Font #####################################################################################################
       final font = rootBundle.load('assets/fonts/VarelaRound-Regular.ttf');
       final fontLoader = FontLoader('Varela')..addFont(font);
       await fontLoader.load();
 
-// Pump Widget #########################################################################################################
+      // Pump Widget #########################################################################################################
       await tester.pumpWidget(
         App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
       );
+
       await expectLater(
         find.byType(App),
-        matchesGoldenFile('app.png'),
-        //matchesGoldenFile('app.png_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png'),
+        //matchesGoldenFile('app.png'),
+        matchesGoldenFile('app_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png'),
       );
+
       await tester.pumpAndSettle();
     },
+    variant: sizeVariant,
     tags: ['golden'],
-    //variant: sizeVariant,
   );
 }
