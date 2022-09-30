@@ -22,6 +22,6 @@ void main() {
       );
     },
     tags: ['golden'],
-    skip: true,
+    // skip: true,
   );
 }

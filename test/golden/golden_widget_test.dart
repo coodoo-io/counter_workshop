@@ -15,7 +15,7 @@ void main() {
   testWidgets(
     'Golden test',
     (WidgetTester tester) async {
-      // Set different Screen Sizes ###########################################################################################
+      // Set different Screen Sizes ####################################################################################
       Size currentSize = sizeVariant.currentValue!;
 
       await tester.binding.setSurfaceSize(currentSize);
@@ -60,6 +60,6 @@ void main() {
     },
     variant: sizeVariant,
     tags: ['golden'],
-    skip: true,
+    // skip: true,
   );
 }
