@@ -60,6 +60,6 @@ void main() {
     },
     variant: sizeVariant,
     tags: ['golden'],
-    // skip: true,
+    skip: true,
   );
 }

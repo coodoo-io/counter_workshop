@@ -16,6 +16,6 @@ void main() {
         child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
       );
     },
-    // skip: true,
+    skip: true,
   );
 }
