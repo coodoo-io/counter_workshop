@@ -9,9 +9,8 @@ import 'package:platform/platform.dart';
 
 void main() {
   final sizeVariant = ValueVariant<Size>({
-    const Size(300, 600),
-    const Size(600, 600),
-    const Size(1000, 1000),
+    const Size(375, 667),
+    const Size(1366, 1024),
   });
   testWidgets(
     'Golden test',
@@ -56,11 +55,11 @@ void main() {
 
       await expectLater(
         find.byType(App),
-        matchesGoldenFile('golden_test_images/app_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png'),
+        matchesGoldenFile('goldens/flutter/app_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png'),
       );
     },
     variant: sizeVariant,
     tags: ['golden'],
-    //skip: true,
+    skip: true,
   );
 }

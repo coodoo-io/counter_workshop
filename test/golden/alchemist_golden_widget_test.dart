@@ -12,9 +12,10 @@ void main() {
     builder: () {
       return GoldenTestScenario(
         name: 'Dashboard',
-        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 600),
+        constraints: const BoxConstraints(maxWidth: 375, maxHeight: 667),
         child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
       );
     },
+    skip: true,
   );
 }
