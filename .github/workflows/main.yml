@@ -20,8 +20,6 @@ jobs:
       - name: Run tests
         run: flutter test
 
-
-name: Test
 on: 
   workflow_dispatch:
 jobs:
