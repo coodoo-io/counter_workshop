@@ -38,6 +38,8 @@ lint:
 test:
 	flutter test
 .PHONY: test
+update-gold: 
+	flutter test --update-goldens
 
 # Build runner
 build-runner:
