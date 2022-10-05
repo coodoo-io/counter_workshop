@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
@@ -65,7 +64,7 @@ class CounterView extends StatelessWidget {
         listener: (context, state) {
           if (state is EditCounterData) {
             // Calling DashboardBloc (MasterPage) from EditCounterBloc (DetailPage)
-            log('EditBlocListener: ${state.counterModel.value}');
+            appLogger.info('EditBlocListener: ${state.counterModel.value}');
             final dashboardBloc = context.read<DashboardBloc>();
             dashboardBloc.add(FetchCounterList());
           }
