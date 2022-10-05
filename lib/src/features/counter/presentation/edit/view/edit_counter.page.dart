@@ -1,4 +1,3 @@
-import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
@@ -11,6 +10,7 @@ import 'package:counter_workshop/src/features/counter/presentation/edit/view/wid
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logging/logging.dart';
 
 class EditCounterPage extends StatelessWidget {
   const EditCounterPage({this.counterId, super.key});
@@ -42,6 +42,7 @@ class CounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final editCounterBloc = context.watch<EditCounterBloc>();
+    final log = Logger('CounterView');
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -64,7 +65,7 @@ class CounterView extends StatelessWidget {
         listener: (context, state) {
           if (state is EditCounterData) {
             // Calling DashboardBloc (MasterPage) from EditCounterBloc (DetailPage)
-            appLogger.info('EditBlocListener: ${state.counterModel.value}');
+            log.info('EditBlocListener: ${state.counterModel.value}');
             final dashboardBloc = context.read<DashboardBloc>();
             dashboardBloc.add(FetchCounterList());
           }
