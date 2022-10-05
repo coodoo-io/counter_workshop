@@ -950,6 +950,7 @@
 			baseConfigurationReference = 8EAD2AD92F72ED5B3629BB47 /* Pods-Runner.debug-prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				FLUTTER_TARGET = lib/main.dart;
 				PRODUCT_NAME = Runner;
 			};
@@ -960,6 +961,7 @@
 			baseConfigurationReference = 0F04C04C8ADE476A5EC4E717 /* Pods-Runner.profile-prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				FLUTTER_TARGET = lib/main.dart;
 				PRODUCT_NAME = Runner;
 			};
@@ -970,6 +972,7 @@
 			baseConfigurationReference = EE9E1F1339FECDFA6259C541 /* Pods-Runner.release-prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-prod";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				FLUTTER_TARGET = lib/main.dart;
 				PRODUCT_NAME = Runner;
 			};
@@ -980,6 +983,7 @@
 			baseConfigurationReference = 9A587F65735FC342C3BBA1BE /* Pods-Runner.debug-stage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-stage";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-stage";
@@ -989,6 +993,7 @@
 			baseConfigurationReference = 2AB770EA6D60B53EEED9FEA1 /* Pods-Runner.profile-stage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-stage";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-stage";
@@ -998,6 +1003,7 @@
 			baseConfigurationReference = 4D0F968A0DBAB6EB68BAD48A /* Pods-Runner.release-stage.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-stage";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-stage";
@@ -1007,6 +1013,7 @@
 			baseConfigurationReference = 193C7082757C708C3D6F2915 /* Pods-Runner.debug-dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-dev";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-dev";
@@ -1016,6 +1023,7 @@
 			baseConfigurationReference = 5F742A2DBF2292F5B6B93934 /* Pods-Runner.profile-dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-dev";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-dev";
@@ -1025,6 +1033,7 @@
 			baseConfigurationReference = C4AE2280396BF4FBF8EADF15 /* Pods-Runner.release-dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-dev";
+				DEVELOPMENT_TEAM = B4V3YPK7ZF;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-dev";
