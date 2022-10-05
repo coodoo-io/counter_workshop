@@ -1,1 +1,4 @@
-**/failures/.png
+# Golden Tests
+**/goldens/**/*.*
+**/failures/**/*.*
+!**/goldens/ci/*.*

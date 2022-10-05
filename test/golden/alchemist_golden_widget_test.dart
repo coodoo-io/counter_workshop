@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   goldenTest(
-    'Alchemist Test',
+    'Countergrid Test alchemist',
     fileName: 'dashboard',
     builder: () {
       return GoldenTestScenario(
@@ -16,6 +16,6 @@ void main() {
         child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
       );
     },
-    skip: true,
+    // skip: true,
   );
 }
