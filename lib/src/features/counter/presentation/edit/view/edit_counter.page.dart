@@ -17,19 +17,6 @@ class EditCounterPage extends StatelessWidget {
   const EditCounterPage({this.counterId, super.key});
   final String? counterId;
 
-  static Route<void> route({String? counterId, bool fullscreen = false}) {
-    return MaterialPageRoute(
-      fullscreenDialog: fullscreen,
-      builder: (context) => BlocProvider(
-        create: (context) => EditCounterBloc(
-          counterRepository: context.read<CounterRepository>(),
-          counterId: counterId,
-        ),
-        child: EditCounterPage(counterId: counterId),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final bloc = EditCounterBloc(
