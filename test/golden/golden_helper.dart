@@ -31,7 +31,7 @@ class GoldenTestHelper {
   }
 
   Future<void> loadVarelaRoundFont() async {
-    final font = rootBundle.load('assets/fontsVarelaRound-Regular.ttf');
+    final font = rootBundle.load('assets/fonts/VarelaRound-Regular.ttf');
     final fontLoader = FontLoader('VarelaRound')..addFont(font);
     await fontLoader.load();
   }
