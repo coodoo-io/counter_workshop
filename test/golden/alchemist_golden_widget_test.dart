@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   goldenTest(
-    'Countergrid Test alchemist',
+    'Golden Countergrid Test alchemist',
     fileName: 'dashboard',
     builder: () {
       return GoldenTestScenario(

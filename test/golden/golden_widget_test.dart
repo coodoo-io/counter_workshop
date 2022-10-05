@@ -12,7 +12,7 @@ void main() {
     const Size(1366, 1024),
   });
   testWidgets(
-    'Countergrid Test Standard',
+    'Golden Countergrid Test Standard',
     (WidgetTester tester) async {
       GoldenTestHelper testHelper = GoldenTestHelper(tester);
       final currentSize = sizeVariant.currentValue!;

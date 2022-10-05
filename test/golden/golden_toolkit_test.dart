@@ -5,7 +5,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 
 void main() {
   testGoldens(
-    'Countergrid Test Golden_Toolkit',
+    'Golden Countergrid Test Golden_Toolkit',
     (tester) async {
       await loadAppFonts();
       await tester.pumpWidgetBuilder(
