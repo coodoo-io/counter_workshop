@@ -28,7 +28,9 @@ void main() {
 
       await expectLater(
         find.byType(App),
-        matchesGoldenFile('golden_images/app_dashboard_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png'),
+        matchesGoldenFile(
+          'goldens/golden_images/app_dashboard_${currentSize.width.toInt()}x${currentSize.height.toInt()}.png',
+        ),
       );
     },
     variant: sizeVariant,
