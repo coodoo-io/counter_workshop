@@ -29,36 +29,36 @@ dev_dependencies:
   flutter_flavorizr: ^2.1.4
 
 flavorizr:
+  ide: "vscode"
   app:
     android:
-      flavorDimensions: "flavor-type"
     ios:
 
   flavors:
     prod:
       app:
-        name: "Clicker"
+        name: "Counter"
       android:
-        applicationId: "de.coodoo.clicker"
+        applicationId: "de.coodoo.counter"
       ios:
-        bundleId: "de.coodoo.clicker"
+        bundleId: "de.coodoo.counter"
 
     stage:
       app:
-        name: "STAGE Clicker"
+        name: "STAGE Counter"
       android:
-        applicationId: "de.coodoo.clicker_stage"
+        applicationId: "de.coodoo.counter_stage"
       ios:
-        bundleId: "de.coodoo.clicker_stage"
+        bundleId: "de.coodoo.counter_stage"
 
     dev:
       app:
-        name: "DEV Clicker"
+        name: "DEV Counter"
 
       android:
-        applicationId: "de.coodoo.clicker_dev"
+        applicationId: "de.coodoo.counter_dev"
       ios:
-        bundleId: "de.coodoo.clicker_dev"
+        bundleId: "de.coodoo.counter_dev"
 
 
 flutter:
