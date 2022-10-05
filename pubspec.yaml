@@ -60,7 +60,6 @@ flavorizr:
       ios:
         bundleId: "de.coodoo.counter_dev"
 
-
 flutter:
   uses-material-design: true
 
