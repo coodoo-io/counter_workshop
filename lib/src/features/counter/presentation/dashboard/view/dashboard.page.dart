@@ -17,7 +17,7 @@ class DashboardPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(context.loc.appTitle),
-        actions: [IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.snowboarding))],
+        actions: [IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.settings))],
       ),
       body: BlocBuilder<DashboardBloc, DashboardState>(
         builder: (context, state) {
