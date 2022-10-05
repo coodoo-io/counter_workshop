@@ -13,10 +13,11 @@ jobs:
         with:
           flutter-version: '3.3.0'
           channel: 'stable'
-
+          
       - name: Install dependencies
         run: flutter pub get
   check_app:
+    needs: build
     runs-on: macos-latest
     steps:
     # before
@@ -26,6 +27,7 @@ jobs:
       - run: make clean
       - run: make lint
   code_quality:
+    needs: build
     runs-on: macos-latest
     steps:
     # before
@@ -39,6 +41,7 @@ jobs:
           name: gl-code-quality-report
           path: gh-code-quality-report.json
   test:
+    needs: build
     runs-on: macos-latest
     steps:
     # before
