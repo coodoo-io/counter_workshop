@@ -1,15 +1,23 @@
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// ignore: must_be_immutable
 class App extends StatefulWidget {
-  const App({required this.counterRepository, super.key});
+  App({CounterRepository? counterRepository, super.key}) {
+      if(counterRepository!=null) {
+        counterRepository = counterRepository;
+      } else {
+        counterRepository= CounterRepository(counterApi: CounterFakeApi());
+      }
+  }
 
-  final CounterRepository counterRepository;
+  late CounterRepository counterRepository;
 
   @override
   State<App> createState() => _AppState();

@@ -11,14 +11,13 @@ class F {
 
   static String get title {
     switch (appFlavor) {
-      case Flavor.prod:
-        return 'Clicker';
       case Flavor.stage:
         return 'Stage Clicker';
       case Flavor.dev:
         return 'DEV Clicker';
+      case Flavor.prod:
       default:
-        return 'title';
+        return 'Clicker';
     }
   }
 }
