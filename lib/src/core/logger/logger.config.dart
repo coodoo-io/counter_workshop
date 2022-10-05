@@ -13,8 +13,9 @@ setupLogger({Level level = Level.INFO}) {
     if (!kIsWeb) {
       // Release Logging
       RotatingFileAppender(
-              formatter: const CustomLogFormatter(colorsEnabled: false), baseFilePath: '/counter_workshop_logs')
-          .attachToLogger(Logger.root);
+        formatter: const CustomLogFormatter(colorsEnabled: false),
+        baseFilePath: '/counter_workshop_logs',
+      ).attachToLogger(Logger.root);
     }
   }
 }
