@@ -13,34 +13,40 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text('${F.title} Page'),
-      ),
-      body: BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-          if (state is DashboardLoadingState) {
-            // loading
-            return const Center(
-              child: CircularProgressIndicator(strokeWidth: 3),
-            );
-          } else if (state is DashboardDataState) {
-            // data
-            return CounterGrid(counterList: state.counterList, columnCount: 2);
-          } else if (state is DashboardErrorState) {
-            // error
-            return ErrorMessage(error: state.error);
-          }
-          // state unknown, fallback to empty or return a common error
-          return const SizedBox();
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          context.go('/counters/new');
-        },
+    return Banner(
+      location: BannerLocation.topEnd,
+      color: Colors.purple,
+      message: F.name.toUpperCase(),
+      textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: const Text('Clicker'),
+        ),
+        body: BlocBuilder<DashboardBloc, DashboardState>(
+          builder: (context, state) {
+            if (state is DashboardLoadingState) {
+              // loading
+              return const Center(
+                child: CircularProgressIndicator(strokeWidth: 3),
+              );
+            } else if (state is DashboardDataState) {
+              // data
+              return CounterGrid(counterList: state.counterList, columnCount: 2);
+            } else if (state is DashboardErrorState) {
+              // error
+              return ErrorMessage(error: state.error);
+            }
+            // state unknown, fallback to empty or return a common error
+            return const SizedBox();
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            context.go('/counters/new');
+          },
+        ),
       ),
     );
   }

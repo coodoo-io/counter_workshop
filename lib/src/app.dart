@@ -1,3 +1,4 @@
+import 'package:counter_workshop/flavors.dart';
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
@@ -13,7 +14,7 @@ class AppStart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return App(counterRepository: counterRepository);
+    return App(counterRepository: counterRepository);
   }
 }
 
@@ -57,13 +58,14 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
     return MaterialApp.router(
-      title: 'Counter Demo',
-      theme: appTheme.light,
-      darkTheme: appTheme.dark,
-      themeMode: ThemeMode.system,
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
-    );
+        title: F.title,
+        theme: appTheme.light,
+        darkTheme: appTheme.dark,
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        routeInformationProvider: router.routeInformationProvider,
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
+      );
   }
 }
