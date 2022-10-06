@@ -7,6 +7,21 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'golden_helper.dart';
 
+import 'dart:async';
+
+Future<void> testExecutable(FutureOr<void> Function() testMain) async {
+  const isRunningInCi = bool.fromEnvironment('CI', defaultValue: false);
+
+  return AlchemistConfig.runWithConfig(
+    config: const AlchemistConfig(
+      platformGoldensConfig: PlatformGoldensConfig(
+        enabled: !isRunningInCi,
+      ),
+    ),
+    run: testMain,
+  );
+}
+
 void main() {
   final sizeVariant = ValueVariant<Size>({
     const Size(375, 667),
