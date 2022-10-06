@@ -51,9 +51,11 @@ clean:
 	flutter pub get
 	make build-runner
 
-# Export Archives .ipa, .aab and .apk
+# Build Archives for iOS/Android and Web
+
 #
-# .ipa Builds
+# Build iOS .ipa
+#
 build-ios:
 	@echo "Build ${ENV}.ipa"
 	make clean
@@ -69,10 +71,9 @@ build-ios-prod:
 build-ios-analyze:
 	@echo "Build iOS analyze"
 	flutter build ipa --analyze-size --suppress-analytics
-
-# Android Build
 #
-# .aab builds
+# Build Android .aab
+#
 build-android:
 	@echo "Build ${ENV}.aab"
 	make clean
@@ -85,7 +86,9 @@ build-android-stage:
 	@make ENV=stage build-android
 build-android-prod:
 	@make ENV=prod build-android
-# .apk builds
+#
+# Build Android .apk
+#
 build-android-apk:
 	@echo "Build self-distribution ${ENV}.apk"
 	make clean
@@ -102,6 +105,21 @@ build-android-apk-prod:
 build-android-analyze:
 	@echo "Build Android analyze"
 	flutter build appbundle --analyze-size --suppress-analytics
+#
+# Build Web
+#
+build-web:
+	@echo "Build web for ${ENV}"
+	make clean
+	rm -rf build-output/web
+	flutter build web
+	cp -r build/web build-output/web
+build-web-dev:
+	@make ENV=dev build-web
+build-web-stage:
+	@make ENV=stage build-web
+build-web-prod:
+	@make ENV=prod build-web
 
 # Release Archive to AppStore/PlayStore
 release-ios:
