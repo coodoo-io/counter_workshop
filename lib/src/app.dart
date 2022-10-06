@@ -1,5 +1,8 @@
+import 'package:counter_workshop/flavors.dart';
+import 'package:counter_workshop/src/core/extensions/localization.extension.dart';
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
+import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
@@ -8,19 +11,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:logging/logging.dart';
 
+// ignore: must_be_immutable
 class App extends StatefulWidget {
-  const App({required this.counterRepository, super.key});
+  App({CounterRepository? counterRepository, super.key}) {
+    if (counterRepository != null) {
+      this.counterRepository = counterRepository;
+    }
+  }
 
-  final CounterRepository counterRepository;
+  CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
 
   @override
-  State<App> createState() => _AppState();
+  State<App> createState() => AppState();
 
-  // ignore: library_private_types_in_public_api
-  static _AppState of(BuildContext context) => context.findAncestorStateOfType<_AppState>()!;
+  static AppState of(BuildContext context) => context.findAncestorStateOfType<AppState>()!;
+
 }
 
-class _AppState extends State<App> {
+class AppState extends State<App> {
   Locale? _locale;
   late final DashboardBloc dashboardBloc;
   final log = Logger('App');
@@ -28,6 +36,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     log.info('App Started');
+
     dashboardBloc = DashboardBloc(counterRepository: widget.counterRepository);
     dashboardBloc.add(FetchCounterList());
     super.initState();
@@ -61,11 +70,12 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
     return MaterialApp.router(
-      title: 'Counter Demo',
+      title: F.title,
       locale: locale,
       theme: appTheme.light,
       darkTheme: appTheme.dark,
       themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
       routeInformationProvider: router.routeInformationProvider,
       routeInformationParser: router.routeInformationParser,
       routerDelegate: router.routerDelegate,
