@@ -5,6 +5,6 @@ import 'package:flutter/material.dart';
 void main() {
   F.appFlavor = Flavor.prod;
   runApp(
-    App()
+    AppStart()
   );
 }

@@ -7,17 +7,20 @@ import 'package:counter_workshop/src/features/counter/presentation/dashboard/blo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// ignore: must_be_immutable
-class App extends StatefulWidget {
-  App({CounterRepository? counterRepository, super.key}) {
-      if(counterRepository!=null) {
-        counterRepository = counterRepository;
-      } else {
-        counterRepository= CounterRepository(counterApi: CounterFakeApi());
-      }
-  }
+class AppStart extends StatelessWidget {
+  AppStart({super.key});
+  final CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
 
-  late CounterRepository counterRepository;
+  @override
+  Widget build(BuildContext context) {
+      return App(counterRepository: counterRepository);
+  }
+}
+
+class App extends StatefulWidget {
+  const App({required this.counterRepository, super.key});
+
+  final CounterRepository counterRepository;
 
   @override
   State<App> createState() => _AppState();

@@ -5,6 +5,6 @@ import 'package:flutter/material.dart';
 void main() {
   F.appFlavor = Flavor.stage;
   runApp(
-    App(),
+    AppStart(),
   );
 }

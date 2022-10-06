@@ -127,6 +127,6 @@ appicons:
 flavorizr:
 	flutter pub run flutter_flavorizr
 deeplink:
-	@printf "Android:\nadb shell am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d 'https://counter.de/counters/2'"
+	@printf "Android:\nadb shell am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d 'counter:///counters/2'"
 	@printf "\n\n"
 	@printf "iOS:\nxcrun simctl openurl booted counter:///counters/2"
