@@ -8,6 +8,7 @@ class F {
   static Flavor? appFlavor;
 
   static String get name => appFlavor?.name ?? '';
+  static bool get isProduction => appFlavor?.name == Flavor.prod.name;
 
   static String get title {
     switch (appFlavor) {

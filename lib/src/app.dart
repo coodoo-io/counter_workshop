@@ -5,6 +5,7 @@ import 'package:counter_workshop/src/features/counter/data/datasources/remote/sr
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -58,14 +59,14 @@ class AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
     return MaterialApp.router(
-        title: F.title,
-        theme: appTheme.light,
-        darkTheme: appTheme.dark,
-        themeMode: ThemeMode.system,
-        debugShowCheckedModeBanner: false,
-        routeInformationProvider: router.routeInformationProvider,
-        routeInformationParser: router.routeInformationParser,
-        routerDelegate: router.routerDelegate,
-      );
+      title: F.title,
+      theme: appTheme.light,
+      darkTheme: appTheme.dark,
+      themeMode: ThemeMode.system,
+      debugShowCheckedModeBanner: false,
+      routeInformationProvider: router.routeInformationProvider,
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
+    );
   }
 }

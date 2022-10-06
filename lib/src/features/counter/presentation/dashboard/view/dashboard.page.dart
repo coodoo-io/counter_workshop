@@ -13,11 +13,8 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Banner(
-      location: BannerLocation.topEnd,
-      color: Colors.purple,
-      message: F.name.toUpperCase(),
-      textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+    return FlavorBanner(
+      showBanner: !F.isProduction,
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -49,5 +46,24 @@ class DashboardPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class FlavorBanner extends StatelessWidget {
+  const FlavorBanner({required this.child, this.showBanner = false, super.key});
+  final Widget child;
+  final bool showBanner;
+  @override
+  Widget build(BuildContext context) {
+    if (showBanner) {
+      return Banner(
+        location: BannerLocation.topEnd,
+        color: F.name==Flavor.dev.name ? Colors.red : Colors.orange,
+        message: F.name.toUpperCase(),
+        textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+        child: child,
+      );
+    }
+    return child;
   }
 }
