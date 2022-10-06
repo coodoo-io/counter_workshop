@@ -48,4 +48,3 @@ app.*.map.json
 test/**/goldens/**/*.*
 test/**/failures/**/*.*
 !test/**/goldens/ci/*.*
-!test/**/goldens/linux/*.*
