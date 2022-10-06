@@ -46,9 +46,9 @@ Test:
     - main
   before_script:
     - export PATH="$PATH":"$HOME/.pub-cache/bin"
-    - flutter pub global activate junitreport
+    - dart pub global activate junitreport
   script:
-    - flutter test --machine --coverage | tojunit -o report.xml
+    - flutter test --machine --coverage
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines\.*: \d+\.\d+\%/'
