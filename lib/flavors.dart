@@ -13,9 +13,9 @@ class F {
   static String get title {
     switch (appFlavor) {
       case Flavor.stage:
-        return 'STAGE Clicker';
+        return '[STAGE] Clicker';
       case Flavor.dev:
-        return 'DEV Clicker';
+        return '[DEV] Clicker';
       case Flavor.prod:
       default:
         return 'Clicker';

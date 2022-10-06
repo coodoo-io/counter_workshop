@@ -60,7 +60,7 @@ class FlavorBanner extends StatelessWidget {
         location: BannerLocation.topEnd,
         color: F.name==Flavor.dev.name ? Colors.red : Colors.orange,
         message: F.name.toUpperCase(),
-        textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0),
+        textStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 12.0, letterSpacing: 1.0, color: Colors.white),
         child: child,
       );
     }
