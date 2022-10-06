@@ -60,15 +60,29 @@ Test:
       junit: report.xml
 
 # Build the app to check if release builds still work
-Build Android (.apk):
+Build Android DEV (.apk):
   stage: build
   except:
     - main
   script:
-    - make build-android-apk
+    - make build-android-apk-dev
   dependencies:
     - Check App
   artifacts:
     expire_in: 2 days
     paths:
-      - build-output/app.apk
+      - build-output/app-dev-release.apk
+
+# Build the app to check if release builds still work
+Build Android STAGE (.aab):
+  stage: build
+  except:
+    - main
+  script:
+    - make build-android-aab-stage
+  dependencies:
+    - Check App
+  artifacts:
+    expire_in: 2 days
+    paths:
+      - build-output/app-stage-release.aab

@@ -74,17 +74,16 @@ build-ios-analyze:
 #
 # Build Android .aab
 #
-build-android:
+build-android-aab:
 	@echo "Build ${ENV}.aab"
 	make clean
 	flutter build appbundle --flavor ${ENV} -t lib/main_${ENV}.dart --obfuscate --split-debug-info=./build-output/debug/
 	cp build/app/outputs/bundle/${ENV}Release/app-${ENV}-release.aab build-output/
-	mv build-output/app-${ENV}-release.aab build-output/app.aab
-build-android-dev:
+build-android-aab-dev:
 	@make ENV=dev build-android
-build-android-stage:
+build-android-aab-stage:
 	@make ENV=stage build-android
-build-android-prod:
+build-android-aab-prod:
 	@make ENV=prod build-android
 #
 # Build Android .apk
@@ -94,7 +93,6 @@ build-android-apk:
 	make clean
 	flutter build apk --flavor ${ENV} -t lib/main_${ENV}.dart --obfuscate --split-debug-info=./build-output/debug/
 	cp build/app/outputs/flutter-apk/app-${ENV}-release.apk build-output/
-	mv build-output/app-${ENV}-release.apk build-output/app.apk
 build-android-apk-dev:
 	@make ENV=dev build-android-apk
 build-android-apk-stage:
@@ -129,7 +127,7 @@ release-android:
 	@echo "Release Android"
 	cd android; bundle exec fastlane deploy
 release:
-	@make build-ios-prod && @make release-ios && @make build-android-appbundle-prod && @make release-android
+	@make build-ios-prod && @make release-ios && @make build-android-aab-prod && @make release-android
 
 # Additional helpers
 packages-outdated:
