@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+
+# Golden Tests
+test/**/goldens/**/*.*
+test/**/failures/**/*.*
+!test/**/goldens/ci/*.*
