@@ -56,7 +56,7 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>counter.de</string>
+        <string>counter.flutter.de</string>
         <key>CFBundleURLSchemes</key>
         <array>
           <string>de.coodoo.counter</string>
