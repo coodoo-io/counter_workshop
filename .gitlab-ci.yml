@@ -76,7 +76,7 @@ Build Android DEV (.apk):
 # Build the app to check if release builds still work
 Build Android STAGE (.aab):
   stage: build
-  except:
+  only:
     - main
   script:
     - make build-android-aab-stage

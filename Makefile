@@ -80,11 +80,11 @@ build-android-aab:
 	flutter build appbundle --flavor ${ENV} -t lib/main_${ENV}.dart --obfuscate --split-debug-info=./build-output/debug/
 	cp build/app/outputs/bundle/${ENV}Release/app-${ENV}-release.aab build-output/
 build-android-aab-dev:
-	@make ENV=dev build-android
+	@make ENV=dev build-android-aab
 build-android-aab-stage:
-	@make ENV=stage build-android
+	@make ENV=stage build-android-aab
 build-android-aab-prod:
-	@make ENV=prod build-android
+	@make ENV=prod build-android-aab
 #
 # Build Android .apk
 #
