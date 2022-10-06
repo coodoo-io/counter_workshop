@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:intl/intl_standalone.dart' if (dart.library.html) 'package:intl/intl_browser.dart';
 
 Future<void> main() async {
-WidgetsFlutterBinding.ensureInitialized(); // makes sure plugins are initialized
+  WidgetsFlutterBinding.ensureInitialized(); // makes sure plugins are initialized
   Intl.systemLocale = await findSystemLocale(); // Tell the intl package the current system language
   setupLogger(level: Level.INFO); // Setup Logger
   F.appFlavor = Flavor.dev; // Set Flavor

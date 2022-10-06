@@ -45,7 +45,9 @@ class DashboardPage extends StatelessWidget {
           onPressed: () {
             context.go('/counters/new');
           },
-        ),),);
+        ),
+      ),
+    );
   }
 }
 

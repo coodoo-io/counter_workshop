@@ -1,5 +1,4 @@
 import 'package:counter_workshop/flavors.dart';
-import 'package:counter_workshop/src/core/extensions/localization.extension.dart';
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
@@ -25,7 +24,6 @@ class App extends StatefulWidget {
   State<App> createState() => AppState();
 
   static AppState of(BuildContext context) => context.findAncestorStateOfType<AppState>()!;
-
 }
 
 class AppState extends State<App> {
