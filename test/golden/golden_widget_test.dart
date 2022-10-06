@@ -66,7 +66,6 @@ void main() {
           child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
         );
       },
-      // skip: true,
     );
     goldenTest(
       'counter_grid_tablet',
@@ -78,7 +77,6 @@ void main() {
           child: App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
         );
       },
-      // skip: true,
     );
   });
 }
