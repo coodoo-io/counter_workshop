@@ -1,0 +1,15 @@
+flutter_icons:
+  image_path: "assets/launcher_icon/icon_stage.png"
+  adaptive_icon_foreground: "assets/launcher_icon/icon_foreground.png" # only available for Android 8.0 devices and above
+  adaptive_icon_background: "#f5f5f5"
+  remove_alpha_ios: true
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "assets/launcher_icon/icon_stage.png"
+    background_color: "#f5f5f5"
+    theme_color: "#f5f5f5"
+  windows:
+    generate: true
+    image_path: "assets/launcher_icon/icon_stage.png"

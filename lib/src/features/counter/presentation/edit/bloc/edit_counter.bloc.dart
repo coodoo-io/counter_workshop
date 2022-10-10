@@ -1,12 +1,13 @@
 import 'dart:async';
-import 'package:counter_workshop/src/core/logger/app_logger.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:logging/logging.dart';
 
 class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
   final CounterRepository counterRepository;
+  final log = Logger('CounterRepository');
 
   EditCounterBloc({required this.counterRepository, required String? counterId}) : super(const EditCounterInitial()) {
     on<FetchCounter>(_onFetchCounter);
@@ -25,14 +26,14 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
   }
 
   Future<void> _onIncrement(CounterIncrementPressed event, Emitter<EditCounterState> emit) async {
-    appLogger.info('INCREMENT: ${event.counterModel.toString()}');
+    log.info('INCREMENT: ${event.counterModel.toString()}');
     final newCounterModel = event.counterModel.copyWith(value: event.counterModel.value + 1);
     emit(EditCounterData(newCounterModel));
     await counterRepository.updateCounter(id: event.counterModel.id, counterModel: newCounterModel);
   }
 
   Future<void> _onDecrement(CounterDecrementPressed event, Emitter<EditCounterState> emit) async {
-    appLogger.info('DECREMENT: ${event.counterModel.toString()}');
+    log.info('DECREMENT: ${event.counterModel.toString()}');
 
     if (event.counterModel.value == 0) {
       return;

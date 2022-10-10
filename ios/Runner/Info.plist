@@ -5,7 +5,7 @@
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
-		<string>Counter Workshop</string>
+		<string>$(BUNDLE_DISPLAY_NAME)</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>counter_workshop</string>
+		<string>$(BUNDLE_NAME)</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -56,18 +56,20 @@
 				<key>CFBundleTypeRole</key>
 				<string>Editor</string>
 				<key>CFBundleURLName</key>
-				<string>counter.de</string>
+				<string>counter.flutter.de</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
 					<string>de.coodoo.counter</string>
 					<string>counter</string>
 				</array>
-				<key>CFBundleLocalizations</key>
-				<array>
-					<string>en</string>
-					<string>de</string>
-				</array>
 			</dict>
 		</array>
+		<key>CFBundleLocalizations</key>
+		<array>
+			<string>en</string>
+			<string>de</string>
+		</array>
+		<key>UIStatusBarHidden</key>
+		<false />
 	</dict>
 </plist>

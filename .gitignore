@@ -48,3 +48,5 @@ app.*.map.json
 test/**/goldens/**/*.*
 test/**/failures/**/*.*
 !test/**/goldens/ci/*.*
+# Custom
+build-output/
