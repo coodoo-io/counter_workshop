@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "494146543454",
+    "project_id": "coodoo-counter",
+    "storage_bucket": "coodoo-counter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494146543454:android:395c0001abb99538b839cf",
+        "android_client_info": {
+          "package_name": "de.coodoo.clicker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494146543454-9p3jqd2pepsmmicgj5jbrjmpl60l8ka8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkXODn5jr6ZPVT-nvEnhR8SA0muJXKi10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494146543454-9p3jqd2pepsmmicgj5jbrjmpl60l8ka8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "494146543454-n1ascu5qq9f50p6i975iuc54pdbgmgu7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.coodoo.clicker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
