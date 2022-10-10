@@ -26,6 +26,8 @@ dependencies:
 
 
 dev_dependencies:
+  integration_test:
+    sdk: flutter
   flutter_test:
     sdk: flutter
 
@@ -34,6 +36,11 @@ dev_dependencies:
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.8
   flutter_flavorizr: ^2.1.4
+
+dependency_overrides:
+  archive: ">=3.3.1"
+
+  
 
 flavorizr:
   ide: "vscode"
