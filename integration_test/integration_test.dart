@@ -36,7 +36,6 @@ void main() {
     testWidgets(
       'Decrement Counter',
       (WidgetTester tester) async {
-        await Future.delayed(const Duration(seconds: 10));
         // Setup
         await tester.pumpWidget(
           App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
