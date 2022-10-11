@@ -49,9 +49,7 @@ class CounterView extends StatelessWidget {
       appBar: AppBar(
         title: BlocBuilder<EditCounterBloc, EditCounterState>(
           builder: (context, state) {
-            return state is EditCounterData
-                ? Text(state.counterModel.name)
-                : const Text('');
+            return state is EditCounterData ? Text(state.counterModel.name) : const Text('');
           },
         ),
       ),
@@ -105,15 +103,13 @@ class CounterView extends StatelessWidget {
                 CustomCircularButton(
                   icon: Icons.remove,
                   onPressed: state is EditCounterData
-                      ? () => editCounterBloc
-                          .add(CounterDecrementPressed(state.counterModel))
+                      ? () => editCounterBloc.add(CounterDecrementPressed(state.counterModel))
                       : null,
                 ),
                 CustomCircularButton(
                   icon: Icons.add,
                   onPressed: state is EditCounterData
-                      ? () => editCounterBloc
-                          .add(CounterIncrementPressed(state.counterModel))
+                      ? () => editCounterBloc.add(CounterIncrementPressed(state.counterModel))
                       : null,
                 ),
               ],
