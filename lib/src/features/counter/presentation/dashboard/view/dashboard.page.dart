@@ -20,7 +20,10 @@ class DashboardPage extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(context.loc.appTitle),
-          actions: [IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.settings))],
+          actions: [
+            //IconButton(onPressed: () => throw Exception(), icon: const Icon(Icons.warning_amber)),
+            IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.settings)),
+          ],
         ),
         body: BlocBuilder<DashboardBloc, DashboardState>(
           builder: (context, state) {
@@ -44,6 +47,7 @@ class DashboardPage extends StatelessWidget {
           child: const Icon(Icons.add),
           onPressed: () {
             context.go('/counters/new');
+            throw Exception();
           },
         ),
       ),
