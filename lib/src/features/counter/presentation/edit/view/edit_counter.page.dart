@@ -78,7 +78,10 @@ class CounterView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CounterText(counterValue: state.counterModel.value),
+                  CounterText(
+                    counterValue: state.counterModel.value,
+                    counterName: state.counterModel.name,
+                  ),
                   Text(state.counterModel.name, style: theme.textTheme.caption),
                 ],
               ),

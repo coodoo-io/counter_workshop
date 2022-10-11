@@ -10,6 +10,7 @@ final router = GoRouter(
   initialLocation: '/counters',
   routes: [
     GoRoute(
+      name: 'counters',
       path: '/counters',
       builder: (context, state) => const DashboardPage(),
       routes: [

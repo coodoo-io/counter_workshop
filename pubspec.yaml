@@ -21,6 +21,11 @@ dependencies:
   go_router: ^4.4.1
   logging: ^1.0.2
   logging_appenders: ^1.0.0
+  convenient_test: ^1.2.0
+
+dependency_overrides:
+  args: ^2.1.1
+  archive: 3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +36,7 @@ dev_dependencies:
   flutter_launcher_icons: ^0.10.0
   flutter_native_splash: ^2.2.8
   flutter_flavorizr: ^2.1.4
+  convenient_test_dev: ^1.2.0
 
 flavorizr:
   ide: "vscode"

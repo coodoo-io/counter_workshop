@@ -79,6 +79,32 @@
             "program": "lib/main_dev.dart"
         },
         {
+            "name": "convenient_test_android",
+            "request": "launch",
+            "type": "dart",
+            "codeLens": {
+                "for": [
+                    "run-file",
+                    "debug-file"
+                ],
+                "path": "conv_test",
+                "title": "${debugType} Conv Test"
+            },
+            "args": [
+                "--flavor",
+                "dev",
+                "--disable-service-auth-codes",
+                "--dart-define",
+                "CONVENIENT_TEST_MANAGER_HOST=10.0.2.2",
+                "--dart-define",
+                "CONVENIENT_TEST_APP_CODE_DIR=lib/main_dev.dart -d 'emulator-5554'",
+            ],
+            "vmAdditionalArgs": [
+                "--host-vmservice-port=9753",
+            ],
+            "program": "conv_test/main_test.dart",
+        },
+        {
             "name": "dev Profile",
             "request": "launch",
             "type": "dart",

@@ -1,15 +1,24 @@
+import 'package:convenient_test/convenient_test.dart';
 import 'package:flutter/material.dart';
 
 class CounterText extends StatelessWidget {
-  const CounterText({super.key, required this.counterValue});
+  const CounterText({
+    super.key,
+    required this.counterValue,
+    required this.counterName,
+  });
   final int counterValue;
+  final String counterName;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Text(
-      '$counterValue',
-      style: theme.textTheme.headlineLarge,
+    return Mark(
+      name: 'counter_text_$counterName',
+      child: Text(
+        '$counterValue',
+        style: theme.textTheme.headlineLarge,
+      ),
     );
   }
 }
