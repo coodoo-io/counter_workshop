@@ -19,12 +19,14 @@ class App extends StatefulWidget {
     }
   }
 
-  CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
+  CounterRepository counterRepository =
+      CounterRepository(counterApi: CounterFakeApi());
 
   @override
   State<App> createState() => AppState();
 
-  static AppState of(BuildContext context) => context.findAncestorStateOfType<AppState>()!;
+  static AppState of(BuildContext context) =>
+      context.findAncestorStateOfType<AppState>()!;
 }
 
 class AppState extends State<App> {

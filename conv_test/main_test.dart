@@ -10,6 +10,7 @@ void main() {
       tTestWidgets('Open Überstunden', (t) async {
         await find.text('Überstunden').should(findsOneWidget);
         await find.text('Überstunden').tap();
+        await t.get('counter_text_Überstunden').should(findsOneWidget);
         await find.byIcon(Icons.add).should(findsOneWidget);
         await find.byIcon(Icons.add).tap();
         await find.byIcon(Icons.add).tap();
@@ -25,9 +26,10 @@ void main() {
       tTestWidgets('Open Settings Check English', (t) async {
         await find.byIcon(Icons.settings).should(findsOneWidget);
         await find.byIcon(Icons.settings).tap();
-        await find.text('English').should(findsOneWidget);
-        await find.text('English').tap();
-        await t.pageBack();
+        await find.text('German').should(findsOneWidget);
+        await find.text('German').tap();
+        await find.text('Deutsch').should(findsOneWidget);
+        await find.text('German').should(findsNothing);
       });
     });
 
