@@ -1,3 +1,4 @@
+import 'package:convenient_test/convenient_test.dart';
 import 'package:counter_workshop/flavors.dart';
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:counter_workshop/src/core/theme/app.theme.dart';
@@ -18,12 +19,14 @@ class App extends StatefulWidget {
     }
   }
 
-  CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
+  CounterRepository counterRepository =
+      CounterRepository(counterApi: CounterFakeApi());
 
   @override
   State<App> createState() => AppState();
 
-  static AppState of(BuildContext context) => context.findAncestorStateOfType<AppState>()!;
+  static AppState of(BuildContext context) =>
+      context.findAncestorStateOfType<AppState>()!;
 }
 
 class AppState extends State<App> {
@@ -57,6 +60,8 @@ class AppState extends State<App> {
 }
 
 class AppView extends StatelessWidget {
+  static final navigatorKey = GlobalKey<ScaffoldMessengerState>();
+
   const AppView({
     Key? key,
     required this.locale,
@@ -67,18 +72,21 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = AppTheme();
-    return MaterialApp.router(
-      title: F.title,
-      locale: locale,
-      theme: appTheme.light,
-      darkTheme: appTheme.dark,
-      themeMode: ThemeMode.system,
-      debugShowCheckedModeBanner: false,
-      routeInformationProvider: router.routeInformationProvider,
-      routeInformationParser: router.routeInformationParser,
-      routerDelegate: router.routerDelegate,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    return ConvenientTestWrapperWidget(
+      child: MaterialApp.router(
+        scaffoldMessengerKey: navigatorKey,
+        title: F.title,
+        locale: locale,
+        theme: appTheme.light,
+        darkTheme: appTheme.dark,
+        themeMode: ThemeMode.system,
+        debugShowCheckedModeBanner: false,
+        routeInformationProvider: router.routeInformationProvider,
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+      ),
     );
   }
 }
