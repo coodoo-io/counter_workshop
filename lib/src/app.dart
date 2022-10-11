@@ -19,12 +19,14 @@ class App extends StatefulWidget {
     }
   }
 
-  CounterRepository counterRepository = CounterRepository(counterApi: CounterFakeApi());
+  CounterRepository counterRepository =
+      CounterRepository(counterApi: CounterFakeApi());
 
   @override
   State<App> createState() => AppState();
 
-  static AppState of(BuildContext context) => context.findAncestorStateOfType<AppState>()!;
+  static AppState of(BuildContext context) =>
+      context.findAncestorStateOfType<AppState>()!;
 }
 
 class AppState extends State<App> {
@@ -58,8 +60,6 @@ class AppState extends State<App> {
 }
 
 class AppView extends StatelessWidget {
-  static final navigatorKey = GlobalKey<ScaffoldMessengerState>();
-
   const AppView({
     Key? key,
     required this.locale,
@@ -72,7 +72,6 @@ class AppView extends StatelessWidget {
     final appTheme = AppTheme();
     return ConvenientTestWrapperWidget(
       child: MaterialApp.router(
-        scaffoldMessengerKey: navigatorKey,
         title: F.title,
         locale: locale,
         theme: appTheme.light,
