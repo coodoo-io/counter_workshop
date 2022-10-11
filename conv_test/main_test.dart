@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:convenient_test_dev/convenient_test_dev.dart';
-import 'package:counter_workshop/src/app.dart';
+import 'package:convenient_test_dev/src/support/get_it.dart';
+import 'package:counter_workshop/main.dart' as main_app;
 import 'package:counter_workshop/src/core/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:counter_workshop/main.dart' as main_app;
-import 'package:convenient_test_dev/src/support/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {
