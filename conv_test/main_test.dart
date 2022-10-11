@@ -2,7 +2,7 @@ import 'package:convenient_test_dev/convenient_test_dev.dart';
 import 'package:counter_workshop/src/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:counter_workshop/main.dart' as mainApp;
+import 'package:counter_workshop/main.dart' as main_app;
 
 void main() {
   convenientTestMain(MyConvenientTestSlot(), () {
@@ -34,20 +34,24 @@ void main() {
     group('open add dialog', () {
       tTestWidgets('should open page', (t) async {
         await find.byIcon(Icons.add).should(findsOneWidget);
+        await find.byIcon(Icons.add).tap();
+      });
+    });
+
+    group('my custom test group', () {
+      tTestWidgets('calling custom method', (t) async {
+        await t.myCustomCommand();
       });
     });
   });
 }
 
-var _deliberatelyFlakyTestHasRun = false;
-
 class MyConvenientTestSlot extends ConvenientTestSlot {
   @override
-  Future<void> appMain(AppMainExecuteMode mode) async => mainApp.main();
+  Future<void> appMain(AppMainExecuteMode mode) async => main_app.main();
 
   @override
   BuildContext? getNavContext(ConvenientTest t) {
-    // TODO: implement getNavContext
     return AppView.navigatorKey.currentContext;
   }
 }

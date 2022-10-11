@@ -9,10 +9,11 @@ class CounterText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Mark(
-        name: 'counter_text',
-        child: Text(
-          '$counterValue',
-          style: theme.textTheme.headlineLarge,
-        ));
+      name: 'counter_text',
+      child: Text(
+        '$counterValue',
+        style: theme.textTheme.headlineLarge,
+      ),
+    );
   }
 }

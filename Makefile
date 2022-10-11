@@ -20,7 +20,7 @@ run-prod-profile:
 
 # Convinient Test Android
 test-convenient-android: 
-	flutter run integration_test/main_test.dart --host-vmservice-port 9753 --disable-service-auth-codes --dart-define CONVENIENT_TEST_MANAGER_HOST=10.0.2.2 --dart-define CONVENIENT_TEST_APP_CODE_DIR=$PWD -d "emulator-5554"
+	flutter run conv_test/main_test.dart --flavor dev --host-vmservice-port 9753 --disable-service-auth-codes --dart-define CONVENIENT_TEST_MANAGER_HOST=10.0.2.2 --dart-define CONVENIENT_TEST_APP_CODE_DIR=$PWD -d "emulator-5554"
 
 # Release Builds
 run-dev-release:
