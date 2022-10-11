@@ -12,6 +12,7 @@ void main() {
         // Setup
         app.main();
         await tester.pumpAndSettle();
+        await Future.delayed(const Duration(seconds: 10));
 
         // Find first Card with count at 1
         final Finder card = find.byType(Card).first;

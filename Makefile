@@ -42,6 +42,8 @@ update-gold:
 	flutter test --update-goldens
 integration-test:
 	flutter test integration_test --flavor 'dev'
+integration-test-desktop:
+	flutter test integration_test
 
 
 # Build runner
