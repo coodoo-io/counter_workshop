@@ -1,6 +1,7 @@
 import 'package:counter_workshop/src/app.dart';
 import 'package:counter_workshop/src/features/counter/data/datasources/remote/src/mock/counter_fake.api.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/main.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -12,13 +13,11 @@ void main() {
       'Increment Counter',
       (WidgetTester tester) async {
         // Setup
-        await tester.pumpWidget(
-          App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
-        );
+        app.main();
         await tester.pumpAndSettle();
 
         // Find first Card with count at 1
-        final Finder card = find.widgetWithText(InkWell, '1');
+        final Finder card = find.byType(Card).first;
         await tester.tap(card);
         await tester.pumpAndSettle();
 
@@ -37,14 +36,12 @@ void main() {
       'Decrement Counter',
       (WidgetTester tester) async {
         // Setup
-        await tester.pumpWidget(
-          App(counterRepository: CounterRepository(counterApi: CounterFakeApi())),
-        );
+        app.main();
         await tester.pumpAndSettle();
 
-        // This part isn't neccessary anymore because the route state from the previous state is still saved
+        // This part isn't neccessary anymore because the route state from the previous state is still saved but the rest is reset
         // Find first Card with count at 1
-        // final Finder card = find.widgetWithText(InkWell, '1');
+        // final Finder card = find.byType(Card).first;
         // await tester.tap(card);
         // await tester.pumpAndSettle();
 
