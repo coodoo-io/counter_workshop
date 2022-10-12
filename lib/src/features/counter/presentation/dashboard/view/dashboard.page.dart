@@ -21,7 +21,7 @@ class DashboardPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.loc.appTitle),
           actions: [
-            //IconButton(onPressed: () => throw Exception(), icon: const Icon(Icons.warning_amber)),
+            IconButton(onPressed: () => context.push('/crashlytics'), icon: const Icon(Icons.warning_amber)),
             IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.settings)),
           ],
         ),
@@ -47,7 +47,6 @@ class DashboardPage extends StatelessWidget {
           child: const Icon(Icons.add),
           onPressed: () {
             context.go('/counters/new');
-            throw Exception();
           },
         ),
       ),

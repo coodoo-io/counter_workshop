@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "494146543454-n1ascu5qq9f50p6i975iuc54pdbgmgu7.apps.googleusercontent.com",
+              "client_id": "494146543454-hp7db16o4bqgqa9b93nq35nch0230tks.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "de.coodoo.clicker"
+                "bundle_id": "de.coodoo.clicker.dev"
               }
             }
           ]
