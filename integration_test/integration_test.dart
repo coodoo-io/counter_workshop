@@ -36,7 +36,7 @@ void main() {
         app.main();
         await tester.pumpAndSettle();
 
-        // This part isn't neccessary anymore because the route state from the previous state is still saved but the rest is reset
+        // This part isn't neccessary anymore because the go_router state from the previous state is still saved but the rest is reset
         // Find first Card with count at 1
         // final Finder card = find.byType(Card).first;
         // await tester.tap(card);
