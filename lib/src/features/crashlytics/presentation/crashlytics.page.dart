@@ -27,10 +27,6 @@ class CrashlyticsPage extends StatelessWidget {
                 child: const Text('Exception with Log'),
               ),
               OutlinedButton(
-                onPressed: () => FirebaseCrashlytics.instance.crash(),
-                child: const Text('Crash App'),
-              ),
-              OutlinedButton(
                 onPressed: () {
                   FirebaseCrashlytics.instance.setCustomKey('str_key', 'hello');
                   throw Exception('Exception with CustomKey');
@@ -43,6 +39,10 @@ class CrashlyticsPage extends StatelessWidget {
                   throw Exception('Exception with UserIdentifier');
                 },
                 child: const Text('Exception with UserIdentifier'),
+              ),
+              OutlinedButton(
+                onPressed: () => FirebaseCrashlytics.instance.crash(),
+                child: const Text('Crash App'),
               ),
             ],
           ),
