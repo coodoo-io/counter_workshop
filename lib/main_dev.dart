@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/intl_standalone.dart' if (dart.library.html) 'package:intl/intl_browser.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_driver/driver_extension.dart';
 
 Future<void> main() async {
