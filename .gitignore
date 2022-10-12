@@ -50,3 +50,5 @@ test/**/failures/**/*.*
 !test/**/goldens/ci/*.*
 # Custom
 build-output/
+chromedriver
+coverage

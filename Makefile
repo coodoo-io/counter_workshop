@@ -44,8 +44,11 @@ integration-test:
 	flutter test integration_test --flavor 'dev'
 integration-test-desktop:
 	flutter test integration_test
-
-
+integration-test-lcov:
+	flutter test integration_test --coverage
+	genhtml coverage/lcov.info -o coverage/html
+integration-test-headless:
+	flutter drive --driver=test_driver/integration_test.dart --target=integration_test/integration_test.dart -d chrome
 # Build runner
 build-runner:
 	flutter pub run build_runner build --delete-conflicting-outputs
