@@ -16,30 +16,33 @@ class CrashlyticsPage extends StatelessWidget {
           child: Column(
             children: [
               OutlinedButton(
-                onPressed: () => throw Exception(),
-                child: const Text('Throw Exception'),
+                onPressed: () => throw Exception('Default Exception'),
+                child: const Text('Default Exception'),
               ),
               OutlinedButton(
                 onPressed: () {
                   FirebaseCrashlytics.instance.log('Yeah. You found the log-button');
                   throw Exception('Exception with log');
                 },
-                child: const Text('Log'),
+                child: const Text('Exception with Log'),
               ),
               OutlinedButton(
                 onPressed: () => FirebaseCrashlytics.instance.crash(),
-                child: const Text('Crash'),
+                child: const Text('Crash App'),
               ),
               OutlinedButton(
                 onPressed: () {
                   FirebaseCrashlytics.instance.setCustomKey('str_key', 'hello');
-                  throw Exception('Custom Key');
+                  throw Exception('Exception with CustomKey');
                 },
-                child: const Text('Custom Key'),
+                child: const Text('Exception with CustomKey'),
               ),
               OutlinedButton(
-                onPressed: () => FirebaseCrashlytics.instance.setUserIdentifier('12345'),
-                child: const Text('User Identifier'),
+                onPressed: () {
+                  FirebaseCrashlytics.instance.setUserIdentifier('12345');
+                  throw Exception('Exception with UserIdentifier');
+                },
+                child: const Text('Exception with UserIdentifier'),
               ),
             ],
           ),
