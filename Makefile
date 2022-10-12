@@ -45,9 +45,6 @@ integration-test:
 integration-test-desktop:
 	flutter test integration_test
 
-# flutter drive \
-  	# --driver=test_driver/integration_test.dart \
-  	# --target=integration_test/integration_failure_test.dart --flavor 'dev'
 
 # Build runner
 build-runner:

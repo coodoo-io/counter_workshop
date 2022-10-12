@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/richardmaasri/Development/Coodoo/Projekte/counter_workshop/ios/RunnerTests.m">
-   </FileRef>
-   <FileRef
       location = "group:Runner.xcodeproj">
    </FileRef>
    <FileRef
