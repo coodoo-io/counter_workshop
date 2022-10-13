@@ -51,7 +51,7 @@ class CrashlyticsPage extends StatelessWidget {
                     stack: StackTrace.current,
                   ),
                 ),
-                child: const Text('Record Flutter Fatal Error'),
+                child: const Text('RecordFlutterFatalError (Manuell)'),
               ),
               OutlinedButton(
                 onPressed: () => FirebaseCrashlytics.instance.recordError(
@@ -61,7 +61,7 @@ class CrashlyticsPage extends StatelessWidget {
                   printDetails: true,
                   fatal: true,
                 ),
-                child: const Text('Record Error'),
+                child: const Text('RecordError (Manuell)'),
               ),
             ],
           ),
