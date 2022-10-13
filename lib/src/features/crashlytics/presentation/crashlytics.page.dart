@@ -44,6 +44,25 @@ class CrashlyticsPage extends StatelessWidget {
                 onPressed: () => FirebaseCrashlytics.instance.crash(),
                 child: const Text('Crash App'),
               ),
+              OutlinedButton(
+                onPressed: () => FirebaseCrashlytics.instance.recordFlutterFatalError(
+                  FlutterErrorDetails(
+                    exception: 'recordFlutterFatalError',
+                    stack: StackTrace.current,
+                  ),
+                ),
+                child: const Text('Record Flutter Fatal Error'),
+              ),
+              OutlinedButton(
+                onPressed: () => FirebaseCrashlytics.instance.recordError(
+                  'dsad',
+                  StackTrace.current,
+                  reason: 'you pushed the Error Button',
+                  printDetails: true,
+                  fatal: true,
+                ),
+                child: const Text('Record Error'),
+              ),
             ],
           ),
         ),
