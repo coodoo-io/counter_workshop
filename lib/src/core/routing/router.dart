@@ -1,5 +1,5 @@
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/view/dashboard.page.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/view/edit_counter.page.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/view/detail_counter.page.dart';
 import 'package:counter_workshop/src/features/settings/presentation/settings.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,14 +17,14 @@ final router = GoRouter(
           path: 'new',
           pageBuilder: (context, state) => const MaterialPage(
             fullscreenDialog: true,
-            child: EditCounterPage(),
+            child: DetailCounterPage(),
           ),
         ),
         GoRoute(
           path: ':id',
           builder: (context, state) {
             final counterId = state.params['id'];
-            return EditCounterPage(counterId: counterId!);
+            return DetailCounterPage(counterId: counterId!);
           },
         ),
       ],

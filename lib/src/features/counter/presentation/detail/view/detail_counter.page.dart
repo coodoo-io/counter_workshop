@@ -3,22 +3,22 @@ import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.bloc.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_text.widget.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/detail_counter.bloc.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/detail_counter.event.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/bloc/detail_counter.state.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/view/widgets/counter_text.widget.dart';
+import 'package:counter_workshop/src/features/counter/presentation/detail/view/widgets/custom_circular_button.widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 
-class EditCounterPage extends StatelessWidget {
-  const EditCounterPage({this.counterId, super.key});
+class DetailCounterPage extends StatelessWidget {
+  const DetailCounterPage({this.counterId, super.key});
   final String? counterId;
 
   @override
   Widget build(BuildContext context) {
-    final bloc = EditCounterBloc(
+    final bloc = DetailCounterBloc(
       counterRepository: context.read<CounterRepository>(),
       counterId: counterId,
     );
@@ -41,21 +41,21 @@ class CounterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final editCounterBloc = context.watch<EditCounterBloc>();
+    final detailCounterBloc = context.watch<DetailCounterBloc>();
     final log = Logger('CounterView');
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: BlocBuilder<EditCounterBloc, EditCounterState>(
+        title: BlocBuilder<DetailCounterBloc, DetailCounterState>(
           builder: (context, state) {
-            return state is EditCounterData ? Text(state.counterModel.name) : const Text('');
+            return state is DetailCounterData ? Text(state.counterModel.name) : const Text('');
           },
         ),
       ),
-      body: BlocConsumer<EditCounterBloc, EditCounterState>(
+      body: BlocConsumer<DetailCounterBloc, DetailCounterState>(
         listenWhen: (previous, current) {
-          if (previous is EditCounterData && current is EditCounterData) {
+          if (previous is DetailCounterData && current is DetailCounterData) {
             if (previous.counterModel.value != current.counterModel.value) {
               return true;
             }
@@ -63,17 +63,17 @@ class CounterView extends StatelessWidget {
           return false;
         },
         listener: (context, state) {
-          if (state is EditCounterData) {
-            // Calling DashboardBloc (MasterPage) from EditCounterBloc (DetailPage)
-            log.info('EditBlocListener: ${state.counterModel.value}');
+          if (state is DetailCounterData) {
+            // Calling DashboardBloc (MasterPage) from DetailCounterBloc (DetailPage)
+            log.info('DetailBlocListener: ${state.counterModel.value}');
             final dashboardBloc = context.read<DashboardBloc>();
             dashboardBloc.add(FetchCounterList());
           }
         },
         builder: (context, state) {
-          if (state is EditCounterLoading) {
+          if (state is DetailCounterLoading) {
             return const CustomLoadingIndicator();
-          } else if (state is EditCounterData) {
+          } else if (state is DetailCounterData) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +83,7 @@ class CounterView extends StatelessWidget {
                 ],
               ),
             );
-          } else if (state is EditCounterError) {
+          } else if (state is DetailCounterError) {
             return ErrorMessage(error: state.error);
           }
           return const SizedBox();
@@ -92,21 +92,21 @@ class CounterView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40.0),
-        child: BlocBuilder<EditCounterBloc, EditCounterState>(
+        child: BlocBuilder<DetailCounterBloc, DetailCounterState>(
           builder: (context, state) {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 CustomCircularButton(
                   icon: Icons.remove,
-                  onPressed: state is EditCounterData
-                      ? () => editCounterBloc.add(CounterDecrementPressed(state.counterModel))
+                  onPressed: state is DetailCounterData
+                      ? () => detailCounterBloc.add(CounterDecrementPressed(state.counterModel))
                       : null,
                 ),
                 CustomCircularButton(
                   icon: Icons.add,
-                  onPressed: state is EditCounterData
-                      ? () => editCounterBloc.add(CounterIncrementPressed(state.counterModel))
+                  onPressed: state is DetailCounterData
+                      ? () => detailCounterBloc.add(CounterIncrementPressed(state.counterModel))
                       : null,
                 ),
               ],
