@@ -34,15 +34,14 @@ class EditCounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final editCounterBloc = context.watch<EditCounterBloc>();
     final log = Logger('CounterView');
+    final nameController = TextEditingController();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () {
-              editCounterBloc.add(const CounterCreate(CounterModel(name: 'Test Counter', value: 0)));
-            },
+            onPressed: () => editCounterBloc.add(CounterCreate(CounterModel(name: nameController.text))),
             child: const Text('Done', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.w700)),
           ),
         ],
@@ -78,7 +77,7 @@ class EditCounterView extends StatelessWidget {
                     children: [
                       CounterValueIndicator(value: counterModel?.value),
                       const SizedBox(height: 80),
-                      _NameInput(name: counterModel?.name),
+                      _NameInput(nameController: nameController),
                     ],
                   ),
                 ),
@@ -97,17 +96,16 @@ class EditCounterView extends StatelessWidget {
 }
 
 class _NameInput extends StatelessWidget {
-  const _NameInput({Key? key, this.name}) : super(key: key);
-  final String? name;
+  const _NameInput({Key? key, required this.nameController}) : super(key: key);
+  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EditCounterBloc, EditCounterState>(
       buildWhen: (previous, current) => previous != current,
       builder: (context, state) {
-        return TextFormField(
-          initialValue: name,
-          // onChanged: (name) => context.read<EditCounterBloc>(),
+        return TextField(
+          controller: nameController,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Enter a name',
