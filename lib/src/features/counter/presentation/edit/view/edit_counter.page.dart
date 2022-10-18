@@ -7,6 +7,7 @@ import 'package:counter_workshop/src/features/counter/presentation/dashboard/blo
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_value_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +32,6 @@ class EditCounterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final editCounterBloc = context.watch<EditCounterBloc>();
     final log = Logger('CounterView');
 
@@ -81,7 +81,20 @@ class EditCounterView extends StatelessWidget {
               return const CustomLoadingIndicator();
             }
             if (state is EditCounterData) {
-              return CounterValueIndicator(counterModel: state.counterModel);
+              final counterModel = state.counterModel;
+
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 100, right: 100, top: 100),
+                  child: Column(
+                    children: [
+                      CounterValueIndicator(value: counterModel?.value),
+                      const SizedBox(height: 80),
+                      _NameInput(name: counterModel?.name),
+                    ],
+                  ),
+                ),
+              );
             }
             if (state is EditCounterError) {
               return ErrorMessage(error: state.error);
@@ -89,38 +102,6 @@ class EditCounterView extends StatelessWidget {
               return const SizedBox.shrink();
             }
           },
-        ),
-      ),
-    );
-  }
-}
-
-class CounterValueIndicator extends StatelessWidget {
-  const CounterValueIndicator({Key? key, this.counterModel}) : super(key: key);
-  final CounterModel? counterModel;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 100, right: 100, top: 100),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 80,
-              backgroundColor: Colors.pink,
-              child: CircleAvatar(
-                radius: 65,
-                backgroundColor: Colors.grey.shade900,
-                child: Text(
-                  counterModel?.value.toString() ?? '0',
-                  style: const TextStyle(color: Colors.white, fontSize: 40),
-                ),
-              ),
-            ),
-            const SizedBox(height: 80),
-            _NameInput(name: counterModel?.name),
-          ],
         ),
       ),
     );
