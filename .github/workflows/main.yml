@@ -20,39 +20,42 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-  check_app:
-    needs: build
-    runs-on: macos-latest
-    steps:
-    # before
-      - run: flutter --version
-    # just run
-      - run: make format
-      - run: make clean
-      - run: make lint
-  code_quality:
-    needs: build
-    runs-on: macos-latest
-    steps:
-    # before
-      - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
-      - run: flutter pub global activate dart_code_metrics
-    # just run
-      - run: metrics lib -r codeclimate  > gh-code-quality-report.json
-      - name: Upload math result for job 1
-        uses: actions/upload-artifact@v3
-        with:
-          name: gl-code-quality-report
-          path: gh-code-quality-report.json
+  # Check app for format and lint exceptions (fail fast)
+  # check_app:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   steps:
+  #     # before
+  #     - run: flutter --version
+  #     # just run
+  #     - run: make format
+  #     - run: make clean
+  #     - run: make lint
+  # # Check code quality
+  # code_quality:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   steps:
+  #     # before
+  #     - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
+  #     - run: flutter pub global activate dart_code_metrics
+  #     # just run
+  #     - run: metrics lib -r codeclimate  > gh-code-quality-report.json
+  #     - name: Upload math result for job 1
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: gl-code-quality-report
+  #         path: gh-code-quality-report.json
+  # Run tests and report quality
   test:
     needs: build
     runs-on: macos-latest
     steps:
-    # before
+      # before
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate junitreport
-    # just run
+      # just run
       - run: flutter test --machine --coverage | tojunit -o report.xml
       - run: lcov --summary coverage/lcov.info
       - run: genhtml coverage/lcov.info --output=coverage
-
+    # Build the app to check if release builds still work
