@@ -13,39 +13,39 @@ jobs:
         with:
           flutter-version: '3.3.0'
           channel: 'stable'
-      # - name: Cache Flutter
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: /flutter/bin/cache/dart-sdk
+      - name: Cache Flutter
+        uses: actions/cache@v3
+        with:
+          path: /flutter/bin/cache/dart-sdk
 
       - name: Install dependencies
         run: flutter pub get
   # Check app for format and lint exceptions (fail fast)
-  # check_app:
-  #   needs: build
-  #   runs-on: macos-latest
-  #   steps:
-  #     # before
-  #     - run: flutter --version
-  #     # just run
-  #     - run: make format
-  #     - run: make clean
-  #     - run: make lint
+  check:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      # before
+      - run: flutter --version
+      # just run
+      - run: make format
+      - run: make clean
+      - run: make lint
   # # Check code quality
-  # code_quality:
-  #   needs: build
-  #   runs-on: macos-latest
-  #   steps:
-  #     # before
-  #     - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
-  #     - run: flutter pub global activate dart_code_metrics
-  #     # just run
-  #     - run: metrics lib -r codeclimate  > gh-code-quality-report.json
-  #     - name: Upload math result for job 1
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: gl-code-quality-report
-  #         path: gh-code-quality-report.json
+  code_quality:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      # before
+      - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
+      - run: flutter pub global activate dart_code_metrics
+      # just run
+      - run: metrics lib -r codeclimate  > gh-code-quality-report.json
+      - name: Upload math result for job 1
+        uses: actions/upload-artifact@v3
+        with:
+          name: gl-code-quality-report
+          path: gh-code-quality-report.json
   # Run tests and report quality
   test:
     needs: build
