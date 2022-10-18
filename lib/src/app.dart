@@ -5,6 +5,7 @@ import 'package:counter_workshop/src/features/counter/data/datasources/remote/sr
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -52,6 +53,10 @@ class AppState extends State<App> {
   }
 
   void setLocale(Locale locale) {
+    FirebaseAnalytics.instance.logEvent(
+      name: 'language_changed',
+      parameters: {'language': locale.languageCode},
+    );
     setState(() => _locale = locale);
   }
 }

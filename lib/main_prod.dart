@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:counter_workshop/flavors.dart';
 import 'package:counter_workshop/src/app.dart';
 import 'package:counter_workshop/src/core/logger/logger.config.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,12 @@ Future<void> main() async {
       // FIREBASE - CRASHLYTICS
       //
       await Firebase.initializeApp();
+
+      //
+      // FIREBASE - ANALYTICS
+      //
+      FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+      await analytics.setAnalyticsCollectionEnabled(true);
 
       // Pass all uncaught errors from the framework to Crashlytics.
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

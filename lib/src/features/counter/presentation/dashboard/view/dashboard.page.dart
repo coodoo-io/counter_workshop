@@ -21,8 +21,18 @@ class DashboardPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(context.loc.appTitle),
           actions: [
-            IconButton(onPressed: () => context.push('/crashlytics'), icon: const Icon(Icons.warning_amber)),
-            IconButton(onPressed: () => context.push('/settings'), icon: const Icon(Icons.settings)),
+            IconButton(
+              onPressed: () {
+                context.push('/crashlytics');
+              },
+              icon: const Icon(Icons.warning_amber),
+            ),
+            IconButton(
+              onPressed: () {
+                context.push('/settings');
+              },
+              icon: const Icon(Icons.settings),
+            ),
           ],
         ),
         body: BlocBuilder<DashboardBloc, DashboardState>(

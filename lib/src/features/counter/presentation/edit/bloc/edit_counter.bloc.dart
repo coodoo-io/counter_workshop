@@ -1,7 +1,9 @@
 import 'dart:async';
+
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 
@@ -27,9 +29,21 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
 
   Future<void> _onIncrement(CounterIncrementPressed event, Emitter<EditCounterState> emit) async {
     log.info('INCREMENT: ${event.counterModel.toString()}');
+
     final newCounterModel = event.counterModel.copyWith(value: event.counterModel.value + 1);
     emit(EditCounterData(newCounterModel));
     await counterRepository.updateCounter(id: event.counterModel.id, counterModel: newCounterModel);
+
+    FirebaseAnalytics.instance.logEvent(
+      name: 'increment_counter',
+      parameters: {
+        'counterID': newCounterModel.id,
+        'counterName': newCounterModel.name,
+        'execution': 'increment',
+        'previousValue': event.counterModel.value,
+        'currentValue': newCounterModel.value,
+      },
+    );
   }
 
   Future<void> _onDecrement(CounterDecrementPressed event, Emitter<EditCounterState> emit) async {
@@ -41,5 +55,16 @@ class EditCounterBloc extends Bloc<EditCounterEvent, EditCounterState> {
     final newCounterModel = event.counterModel.copyWith(value: event.counterModel.value - 1);
     emit(EditCounterData(newCounterModel));
     await counterRepository.updateCounter(id: event.counterModel.id, counterModel: newCounterModel);
+
+    FirebaseAnalytics.instance.logEvent(
+      name: 'decrement_counter',
+      parameters: {
+        'counterID': newCounterModel.id,
+        'counterName': newCounterModel.name,
+        'execution': 'decrement',
+        'previousValue': event.counterModel.value,
+        'currentValue': newCounterModel.value,
+      },
+    );
   }
 }
