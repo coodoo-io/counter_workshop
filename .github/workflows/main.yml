@@ -13,10 +13,10 @@ jobs:
         with:
           flutter-version: '3.3.0'
           channel: 'stable'
-      - name: Cache Flutter
-        uses: actions/cache@v3
-        with:
-          path: /flutter/bin/cache/dart-sdk
+      # - name: Cache Flutter
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: /flutter/bin/cache/dart-sdk
 
       - name: Install dependencies
         run: flutter pub get
