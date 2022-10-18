@@ -46,50 +46,48 @@ class EditCounterView extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: BlocConsumer<EditCounterBloc, EditCounterState>(
-          listenWhen: (previous, current) {
-            if (previous is EditCounterLoading && current is EditCounterData) {
-              return true;
-            }
-            return false;
-          },
-          listener: (context, state) {
-            if (state is EditCounterData) {
-              // Calling DashboardBloc (MasterPage) from EditCounterBloc (EditPage)
-              log.info('EditBlocListener: ${state.counterModel?.name}');
-              final dashboardBloc = context.read<DashboardBloc>();
-              dashboardBloc.add(FetchCounterList());
-              context.pop();
-            }
-          },
-          builder: (context, state) {
-            if (state is EditCounterLoading) {
-              return const CustomLoadingIndicator();
-            }
-            if (state is EditCounterData) {
-              final counterModel = state.counterModel;
+      body: BlocConsumer<EditCounterBloc, EditCounterState>(
+        listenWhen: (previous, current) {
+          if (previous is EditCounterLoading && current is EditCounterData) {
+            return true;
+          }
+          return false;
+        },
+        listener: (context, state) {
+          if (state is EditCounterData) {
+            // Calling DashboardBloc (MasterPage) from EditCounterBloc (EditPage)
+            log.info('EditBlocListener: ${state.counterModel?.name}');
+            final dashboardBloc = context.read<DashboardBloc>();
+            dashboardBloc.add(FetchCounterList());
+            context.pop();
+          }
+        },
+        builder: (context, state) {
+          if (state is EditCounterLoading) {
+            return const Center(child: CustomLoadingIndicator());
+          }
+          if (state is EditCounterData) {
+            final counterModel = state.counterModel;
 
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 100, right: 100, top: 100),
-                  child: Column(
-                    children: [
-                      CounterValueIndicator(value: counterModel?.value),
-                      const SizedBox(height: 80),
-                      _NameInput(nameController: nameController),
-                    ],
-                  ),
+            return Padding(
+              padding: const EdgeInsets.only(left: 100, right: 100, top: 100),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CounterValueIndicator(value: counterModel?.value),
+                    const SizedBox(height: 80),
+                    _NameInput(nameController: nameController),
+                  ],
                 ),
-              );
-            }
-            if (state is EditCounterError) {
-              return ErrorMessage(error: state.error);
-            } else {
-              return const SizedBox.shrink();
-            }
-          },
-        ),
+              ),
+            );
+          }
+          if (state is EditCounterError) {
+            return Center(child: ErrorMessage(error: state.error));
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
     );
   }
