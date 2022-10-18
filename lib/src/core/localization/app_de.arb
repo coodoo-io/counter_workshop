@@ -3,5 +3,7 @@
     "appTitle": "Zähler",
     "settings": "Einstellungen",
     "german": "Deutsch",
-    "english": "Englisch"
+    "english": "Englisch",
+    "create": "Erstellen",
+    "enterName": "Gib einen Namen an"
 }

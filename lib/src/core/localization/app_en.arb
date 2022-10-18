@@ -15,5 +15,13 @@
     "english": "English",
     "@english": {
       "description": "Language name: English"
+    },
+    "create": "Create",
+    "@create": {
+      "description": "Title of the create counter dialog"
+    },
+    "enterName": "Enter a name",
+    "@enterName": {
+      "description": "Enter a counter name"
     }
 }

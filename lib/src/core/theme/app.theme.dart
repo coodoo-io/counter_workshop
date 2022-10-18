@@ -53,6 +53,12 @@ class AppTheme {
           fontSize: 160,
         ),
       ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+        hintStyle: base.textTheme.caption,
+        fillColor: isLightMode ? Colors.grey.shade300 : Colors.grey.shade900,
+        filled: true,
+      ),
     );
   }
 }

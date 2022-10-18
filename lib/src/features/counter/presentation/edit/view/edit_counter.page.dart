@@ -1,3 +1,4 @@
+import 'package:counter_workshop/src/core/extensions/localization.extension.dart';
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
@@ -35,6 +36,7 @@ class EditCounterView extends StatelessWidget {
     final editCounterBloc = context.watch<EditCounterBloc>();
     final log = Logger('CounterView');
     final nameController = TextEditingController();
+    final theme = Theme.of(context);
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -42,7 +44,7 @@ class EditCounterView extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => editCounterBloc.add(CounterCreate(CounterModel(name: nameController.text))),
-            child: const Text('Done', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.w700)),
+            child: Text(context.loc.create, style: theme.textTheme.button),
           ),
         ],
       ),
@@ -74,6 +76,7 @@ class EditCounterView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    const SizedBox(height: 20),
                     CounterValueIndicator(value: counterModel?.value),
                     const SizedBox(height: 80),
                     _NameInput(nameController: nameController),
@@ -104,13 +107,7 @@ class _NameInput extends StatelessWidget {
       builder: (context, state) {
         return TextField(
           controller: nameController,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: 'Enter a name',
-            hintStyle: const TextStyle(color: Colors.grey),
-            fillColor: Colors.grey.shade900,
-            filled: true,
-          ),
+          decoration: InputDecoration(hintText: context.loc.enterName),
         );
       },
     );
