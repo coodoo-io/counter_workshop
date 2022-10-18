@@ -10,11 +10,6 @@ abstract class EditCounterState extends Equatable {
   List<Object?> get props => [];
 }
 
-/// The initial Counter State
-class EditCounterInitial extends EditCounterState {
-  const EditCounterInitial();
-}
-
 /// State indicating that data is being loaded
 class EditCounterLoading extends EditCounterState {
   const EditCounterLoading();
