@@ -24,6 +24,7 @@ class EditCounterLoading extends EditCounterState {
 class EditCounterData extends EditCounterState {
   final CounterModel? counterModel;
   const EditCounterData(this.counterModel);
+
   @override
   List<Object?> get props => [counterModel];
 }
@@ -32,6 +33,7 @@ class EditCounterData extends EditCounterState {
 class EditCounterError extends EditCounterState {
   final String error;
   const EditCounterError(this.error);
+
   @override
   List<Object> get props => [error];
 }

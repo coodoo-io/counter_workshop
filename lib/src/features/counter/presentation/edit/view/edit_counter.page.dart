@@ -41,19 +41,7 @@ class EditCounterView extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              editCounterBloc.add(
-                const CounterCreate(
-                  CounterModel(
-                    name: 'test',
-                    value: 0,
-                    color: Colors.white,
-                    id: '9',
-                    goalValue: 100,
-                    startValue: 12,
-                    stepSize: 1,
-                  ),
-                ),
-              );
+              editCounterBloc.add(const CounterCreate(CounterModel(name: 'Test Counter', value: 0)));
             },
             child: const Text('Done', style: TextStyle(color: Colors.pink, fontWeight: FontWeight.w700)),
           ),
@@ -69,7 +57,7 @@ class EditCounterView extends StatelessWidget {
           },
           listener: (context, state) {
             if (state is EditCounterData) {
-              // Calling DashboardBloc (MasterPage) from DetailCounterBloc (DetailPage)
+              // Calling DashboardBloc (MasterPage) from EditCounterBloc (EditPage)
               log.info('EditBlocListener: ${state.counterModel?.name}');
               final dashboardBloc = context.read<DashboardBloc>();
               dashboardBloc.add(FetchCounterList());
@@ -119,7 +107,7 @@ class _NameInput extends StatelessWidget {
       builder: (context, state) {
         return TextFormField(
           initialValue: name,
-          // onChanged: (email) => context.read<EditCounterBloc>().emailChanged(email),
+          // onChanged: (name) => context.read<EditCounterBloc>(),
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Enter a name',
