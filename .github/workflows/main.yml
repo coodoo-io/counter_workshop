@@ -7,17 +7,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.3.0'
           channel: 'stable'
-      - name: Cache Flutter dependencies
-        uses: actions/cache@v2
-        with:
-          path: /flutter/bin/cache/dart-sdk
-          key: ${{ runner.OS }}-flutter-install-cache-${{ env.flutter_version }}
       - name: Install dependencies
         run: flutter pub get
   # Check app for format and lint exceptions (fail fast)
@@ -25,6 +19,13 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.0'
+          channel: 'stable'
       # before
       - run: flutter --version
       # just run
@@ -36,7 +37,14 @@ jobs:
     needs: build
     runs-on: macos-latest
     steps:
-  #     # before
+  # before
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.0'
+          channel: 'stable'
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate dart_code_metrics
       # just run
@@ -46,10 +54,17 @@ jobs:
         with:
           path: gh-code-quality-report.json
   # Run tests and report quality
-  # test:
-  #   needs: build
-  #   runs-on: macos-latest
-  #   steps:
+  test:
+    needs: build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.0'
+          channel: 'stable'
       # before
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate junitreport
@@ -59,10 +74,17 @@ jobs:
       - run: genhtml coverage/lcov.info --output=coverage
 
     # Build the app to check if release builds still work
-  # apk:
-  #   needs: [build, check]
-  #   runs-on: macos-latest
-  #   steps:
+  apk:
+    needs: [build, check]
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.3.0'
+          channel: 'stable'
       - run: make build-android-apk
       - name: 'Upload APK'
         uses: actions/upload-artifact@v3
