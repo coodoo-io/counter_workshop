@@ -61,7 +61,6 @@ jobs:
           minimum-coverage: 90
           artifact-name: code-coverage-report
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          working-directory: apps/my-first-app
       - run: genhtml coverage/lcov.info --output=coverage
 
     # Build the app to check if release builds still work
