@@ -13,7 +13,7 @@ jobs:
         with:
           flutter-version: '3.3.0'
           channel: 'stable'
-    - name: Cache Flutter dependencies
+      - name: Cache Flutter dependencies
         uses: actions/cache@v2
         with:
           path: /opt/hostedtoolcache/flutter
