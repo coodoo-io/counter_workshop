@@ -16,7 +16,7 @@ jobs:
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
         with:
-          path: /opt/hostedtoolcache/flutter
+          path: /flutter/bin/cache/dart-sdk
           key: ${{ runner.OS }}-flutter-install-cache-${{ env.flutter_version }}
       - name: Install dependencies
         run: flutter pub get
