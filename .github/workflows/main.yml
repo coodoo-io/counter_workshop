@@ -35,9 +35,10 @@ jobs:
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate dart_code_metrics
       - run: metrics lib -r codeclimate  > gh-code-quality-report.json
-      - name: Upload math result for job 1
+      - name: Upload Code Quality Report
         uses: actions/upload-artifact@v3
         with:
+          name: gh-code-quality-report
           path: gh-code-quality-report.json
   # Run tests and report quality
   test:
@@ -54,14 +55,21 @@ jobs:
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate junitreport
       - run: flutter test --machine --coverage | tojunit -o report.xml
-      - name: Report code coverage
-        uses: zgosalvez/github-actions-report-lcov@v1
+      - name: Upload Report
+        uses: actions/upload-artifact@v3
         with:
-          coverage-files: coverage/lcov.*.info
-          minimum-coverage: 90
-          artifact-name: code-coverage-report
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: genhtml coverage/lcov.info --output=coverage
+          name: report
+          path: report.xml
+
+      # - name: Report code coverage
+      #   uses: zgosalvez/github-actions-report-lcov@v1
+      #   with:
+      #     coverage-files: coverage/lcov.info
+      #     minimum-coverage: 90
+      #     artifact-name: code-coverage-report
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     path: $CI_PROJECT_DIR/coverage
+      # - run: genhtml coverage/lcov.info --output=coverage
 
     # Build the app to check if release builds still work
   apk:
