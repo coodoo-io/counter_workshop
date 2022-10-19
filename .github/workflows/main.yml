@@ -16,18 +16,11 @@ jobs:
           cache: true
       - name: Install dependencies
         run: flutter pub get
-      - run: |
-          echo CACHE-PATH=${{ steps.flutter-action.outputs.CACHE-PATH }}
-          echo CACHE-KEY=${{ steps.flutter-action.outputs.CACHE-KEY }}
-          echo CHANNEL=${{ steps.flutter-action.outputs.CHANNEL }}
-          echo VERSION=${{ steps.flutter-action.outputs.VERSION }}
-          echo ARCHITECTURE=${{ steps.flutter-action.outputs.ARCHITECTURE }}
-        shell: bash
   # Check app for format and lint exceptions (fail fast)
-  check:
-    needs: build
-    runs-on: macos-latest
-    steps:
+  # check:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   steps:
       # before
       - run: flutter --version
       # just run
@@ -35,11 +28,11 @@ jobs:
       - run: make clean
       - run: make lint
   # # Check code quality
-  code_quality:
-    needs: build
-    runs-on: macos-latest
-    steps:
-      # before
+  # code_quality:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   steps:
+  #     # before
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate dart_code_metrics
       # just run
@@ -50,10 +43,10 @@ jobs:
           name: gl-code-quality-report
           path: gh-code-quality-report.json
   # Run tests and report quality
-  test:
-    needs: build
-    runs-on: macos-latest
-    steps:
+  # test:
+  #   needs: build
+  #   runs-on: macos-latest
+  #   steps:
       # before
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate junitreport
