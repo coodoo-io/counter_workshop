@@ -1,8 +1,9 @@
 name: Flutter Workflow
 
-on: push
-  branches-ignore:
-    - main
+on:
+  push:
+    branches-ignore:
+      - main
 jobs:
   # Check app for format and lint exceptions (fail fast)
   check:
