@@ -23,7 +23,7 @@ jobs:
   # Check code quality
   code_quality:
     needs: check
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
   # Run tests and report quality
   test:
     needs: check
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -60,7 +60,7 @@ jobs:
     # Build the app to check if release builds still work
   apk:
     needs: [check, test, code_quality]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
