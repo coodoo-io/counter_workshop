@@ -54,4 +54,17 @@ jobs:
       - run: flutter test --machine --coverage | tojunit -o report.xml
       - run: lcov --summary coverage/lcov.info
       - run: genhtml coverage/lcov.info --output=coverage
+
     # Build the app to check if release builds still work
+  # apk:
+  #   needs: [build, check]
+  #   runs-on: macos-latest
+  #   steps:
+      - run: make build-android-apk
+      - name: 'Upload APK'
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: build-output/app.apk
+          retention-days: 2
+      
