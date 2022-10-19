@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
   # Check app for format and lint exceptions (fail fast)
-  # check:
-  #   needs: build
-  #   runs-on: macos-latest
-  #   steps:
+  check:
+    needs: build
+    runs-on: macos-latest
+    steps:
       # before
       - run: flutter --version
       # just run
@@ -32,10 +32,10 @@ jobs:
       - run: make clean
       - run: make lint
   # # Check code quality
-  # code_quality:
-  #   needs: build
-  #   runs-on: macos-latest
-  #   steps:
+  code_quality:
+    needs: build
+    runs-on: macos-latest
+    steps:
   #     # before
       - run: export PATH="$PATH":"$HOME/.pub-cache/bin"
       - run: flutter pub global activate dart_code_metrics
