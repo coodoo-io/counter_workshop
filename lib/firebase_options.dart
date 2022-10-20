@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -58,5 +55,15 @@ class DefaultFirebaseOptions {
     messagingSenderId: '494146543454',
     projectId: 'coodoo-counter',
     storageBucket: 'coodoo-counter.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCMs7TVHaSZfJ4wuiWl9J51RIDZp3B_6-Y',
+    appId: '1:494146543454:ios:95afba22ce30e446b839cf',
+    messagingSenderId: '494146543454',
+    projectId: 'coodoo-counter',
+    storageBucket: 'coodoo-counter.appspot.com',
+    iosClientId: '494146543454-hp7db16o4bqgqa9b93nq35nch0230tks.apps.googleusercontent.com',
+    iosBundleId: 'de.coodoo.clicker.dev',
   );
 }
