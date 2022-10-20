@@ -5,5 +5,7 @@
     "german": "Deutsch",
     "english": "Englisch",
     "create": "Erstellen",
-    "enterName": "Gib einen Namen an"
+    "setName": "Gib einen Namen an",
+    "setGoal": "Gib ein Ziel an",
+    "enterValidNumber": "Bitte gib eine valide Nummer an"
 }

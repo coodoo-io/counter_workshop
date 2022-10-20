@@ -9,6 +9,8 @@ import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edi
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_value_indicator.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/goal_input.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/name_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,15 +37,25 @@ class EditCounterView extends StatelessWidget {
   Widget build(BuildContext context) {
     final editCounterBloc = context.watch<EditCounterBloc>();
     final log = Logger('CounterView');
-    final nameController = TextEditingController();
     final theme = Theme.of(context);
+
+    final nameController = TextEditingController();
+    final goalController = TextEditingController(text: '0');
+    final formKey = GlobalKey<FormState>();
+
+    void createCounter() {
+      if (formKey.currentState != null && formKey.currentState!.validate()) {
+        final counter = CounterModel(name: nameController.text, goalValue: int.parse(goalController.text));
+        editCounterBloc.add(CounterCreate(counter));
+      }
+    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         actions: [
           TextButton(
-            onPressed: () => editCounterBloc.add(CounterCreate(CounterModel(name: nameController.text))),
+            onPressed: () => createCounter(),
             child: Text(context.loc.create, style: theme.textTheme.button),
           ),
         ],
@@ -71,45 +83,37 @@ class EditCounterView extends StatelessWidget {
           if (state is EditCounterData) {
             final counterModel = state.counterModel;
 
-            return Padding(
-              padding: const EdgeInsets.only(left: 100, right: 100, top: 100),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    CounterValueIndicator(value: counterModel?.value),
-                    const SizedBox(height: 80),
-                    _NameInput(nameController: nameController),
-                  ],
-                ),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  CounterValueIndicator(value: counterModel?.value),
+                  const SizedBox(height: 80),
+                  Center(
+                    child: FractionallySizedBox(
+                      widthFactor: 0.8,
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            NameInput(nameController: nameController),
+                            const SizedBox(height: 20),
+                            GoalInput(goalController: goalController)
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
             );
           }
           if (state is EditCounterError) {
             return Center(child: ErrorMessage(error: state.error));
-          } else {
-            return const SizedBox.shrink();
           }
+          return const SizedBox.shrink();
         },
       ),
-    );
-  }
-}
-
-class _NameInput extends StatelessWidget {
-  const _NameInput({Key? key, required this.nameController}) : super(key: key);
-  final TextEditingController nameController;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<EditCounterBloc, EditCounterState>(
-      buildWhen: (previous, current) => previous != current,
-      builder: (context, state) {
-        return TextField(
-          controller: nameController,
-          decoration: InputDecoration(hintText: context.loc.enterName),
-        );
-      },
     );
   }
 }

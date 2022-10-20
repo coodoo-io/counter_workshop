@@ -20,8 +20,16 @@
     "@create": {
       "description": "Title of the create counter dialog"
     },
-    "enterName": "Enter a name",
-    "@enterName": {
-      "description": "Enter a counter name"
+    "setName": "Set a name",
+    "@setName": {
+      "description": "Set a counter name"
+    },
+    "setGoal": "Set a goal",
+    "@setGoal": {
+      "description": "Set a counter goal"
+    },
+    "enterValidNumber": "Please enter a valid number",
+    "@enterValidNumber": {
+      "description": "Error message when the user enters an invalid number"
     }
 }
