@@ -40,12 +40,15 @@ class EditCounterView extends StatelessWidget {
     final theme = Theme.of(context);
 
     final nameController = TextEditingController();
-    final goalController = TextEditingController(text: '0');
+    final goalController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
     void createCounter() {
       if (formKey.currentState != null && formKey.currentState!.validate()) {
-        final counter = CounterModel(name: nameController.text, goalValue: int.parse(goalController.text));
+        final counter = CounterModel(
+          name: nameController.text,
+          goalValue: goalController.text.isNotEmpty ? int.parse(goalController.text) : null,
+        );
         editCounterBloc.add(CounterCreate(counter));
       }
     }
@@ -83,28 +86,30 @@ class EditCounterView extends StatelessWidget {
           if (state is EditCounterData) {
             final counterModel = state.counterModel;
 
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  CounterValueIndicator(value: counterModel?.value),
-                  const SizedBox(height: 80),
-                  Center(
-                    child: FractionallySizedBox(
-                      widthFactor: 0.8,
-                      child: Form(
-                        key: formKey,
-                        child: Column(
-                          children: [
-                            NameInput(nameController: nameController),
-                            const SizedBox(height: 20),
-                            GoalInput(goalController: goalController)
-                          ],
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 40),
+                    CounterValueIndicator(value: counterModel?.value),
+                    const SizedBox(height: 80),
+                    Center(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.8,
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              NameInput(nameController: nameController),
+                              const SizedBox(height: 20),
+                              GoalInput(goalController: goalController)
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             );
           }

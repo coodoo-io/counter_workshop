@@ -6,6 +6,7 @@
     "english": "Englisch",
     "create": "Erstellen",
     "setName": "Gib einen Namen an",
-    "setGoal": "Gib ein Ziel an",
-    "enterValidNumber": "Bitte gib eine valide Nummer an"
+    "setGoal": "Gib ein Ziel an (optional)",
+    "enterValidNumber": "Bitte gib eine valide Nummer an",
+    "enterPositiveNumber": "Bitte gib eine positive Nummer an"
 }

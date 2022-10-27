@@ -20,11 +20,17 @@ class GoalInput extends StatelessWidget {
       keyboardType: TextInputType.number,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return context.loc.setGoal;
+          return null;
         }
+
         if (int.tryParse(value) == null) {
           return context.loc.enterValidNumber;
         }
+
+        if (int.parse(value) < 0) {
+          return context.loc.enterPositiveNumber;
+        }
+
         return null;
       },
     );

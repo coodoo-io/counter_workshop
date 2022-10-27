@@ -26,10 +26,14 @@
     },
     "setGoal": "Set a goal",
     "@setGoal": {
-      "description": "Set a counter goal"
+      "description": "Set a counter goal (optional)"
     },
     "enterValidNumber": "Please enter a valid number",
     "@enterValidNumber": {
-      "description": "Error message when the user enters an invalid number"
+      "description": "Error message when the user enters a invalid number"
+    },
+    "enterPositiveNumber": "Please enter a positive number",
+    "@enterPositiveNumber": {
+      "description": "Error message when the user enters a negative number"
     }
 }
