@@ -5,13 +5,9 @@ import 'package:flutter/foundation.dart';
 @immutable
 abstract class EditCounterState extends Equatable {
   const EditCounterState();
-  @override
-  List<Object> get props => [];
-}
 
-/// The initial Counter State
-class EditCounterInitial extends EditCounterState {
-  const EditCounterInitial();
+  @override
+  List<Object?> get props => [];
 }
 
 /// State indicating that data is being loaded
@@ -19,18 +15,20 @@ class EditCounterLoading extends EditCounterState {
   const EditCounterLoading();
 }
 
-/// State indicating that data was loaded
+/// State indicating that data was edited
 class EditCounterData extends EditCounterState {
-  final CounterModel counterModel;
+  final CounterModel? counterModel;
   const EditCounterData(this.counterModel);
+
   @override
-  List<Object> get props => [counterModel];
+  List<Object?> get props => [counterModel];
 }
 
 /// Error counter State
 class EditCounterError extends EditCounterState {
   final String error;
   const EditCounterError(this.error);
+
   @override
   List<Object> get props => [error];
 }
