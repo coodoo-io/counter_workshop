@@ -1,118 +1,123 @@
+import 'package:counter_workshop/src/core/extensions/localization.extension.dart';
 import 'package:counter_workshop/src/core/widgets/custom_loading_indicator.widget.dart';
 import 'package:counter_workshop/src/core/widgets/error_message.widget.dart';
 import 'package:counter_workshop/src/features/counter/data/repositories/counter.repository.dart';
+import 'package:counter_workshop/src/features/counter/domain/model/counter.model.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/dashboard/bloc/dashboard.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.bloc.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.event.dart';
 import 'package:counter_workshop/src/features/counter/presentation/edit/bloc/edit_counter.state.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_text.widget.dart';
-import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/custom_circular_button.widget.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/counter_value_indicator.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/goal_input.dart';
+import 'package:counter_workshop/src/features/counter/presentation/edit/view/widgets/name_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 
 class EditCounterPage extends StatelessWidget {
-  const EditCounterPage({this.counterId, super.key});
-  final String? counterId;
+  const EditCounterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = EditCounterBloc(
-      counterRepository: context.read<CounterRepository>(),
-      counterId: counterId,
-    );
-    // Fetch data if counterId is provider
-    if (counterId != null) {
-      bloc.add(FetchCounter(counterId!));
-    }
+    final bloc = EditCounterBloc(counterRepository: context.read<CounterRepository>());
 
     return BlocProvider(
       create: (context) => bloc,
-      child: const CounterView(),
+      child: const EditCounterView(),
     );
   }
 }
 
-/// actual counter page
-class CounterView extends StatelessWidget {
-  const CounterView({super.key});
+class EditCounterView extends StatelessWidget {
+  const EditCounterView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final editCounterBloc = context.watch<EditCounterBloc>();
     final log = Logger('CounterView');
+    final theme = Theme.of(context);
+
+    final nameController = TextEditingController();
+    final goalController = TextEditingController();
+    final formKey = GlobalKey<FormState>();
+
+    void createCounter() {
+      if (formKey.currentState != null && formKey.currentState!.validate()) {
+        final counter = CounterModel(
+          name: nameController.text,
+          goalValue: goalController.text.isNotEmpty ? int.parse(goalController.text) : null,
+        );
+        editCounterBloc.add(CounterCreate(counter));
+      }
+    }
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: BlocBuilder<EditCounterBloc, EditCounterState>(
-          builder: (context, state) {
-            return state is EditCounterData ? Text(state.counterModel.name) : const Text('');
-          },
-        ),
+        actions: [
+          TextButton(
+            onPressed: () => createCounter(),
+            child: Text(context.loc.create, style: theme.textTheme.button),
+          ),
+        ],
       ),
       body: BlocConsumer<EditCounterBloc, EditCounterState>(
         listenWhen: (previous, current) {
-          if (previous is EditCounterData && current is EditCounterData) {
-            if (previous.counterModel.value != current.counterModel.value) {
-              return true;
-            }
+          if (previous is EditCounterLoading && current is EditCounterData) {
+            return true;
           }
           return false;
         },
         listener: (context, state) {
           if (state is EditCounterData) {
-            // Calling DashboardBloc (MasterPage) from EditCounterBloc (DetailPage)
-            log.info('EditBlocListener: ${state.counterModel.value}');
+            // Calling DashboardBloc (MasterPage) from EditCounterBloc (EditPage)
+            log.info('EditBlocListener: ${state.counterModel?.name}');
             final dashboardBloc = context.read<DashboardBloc>();
             dashboardBloc.add(FetchCounterList());
+            context.pop();
           }
         },
         builder: (context, state) {
           if (state is EditCounterLoading) {
-            return const CustomLoadingIndicator();
-          } else if (state is EditCounterData) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CounterText(counterValue: state.counterModel.value),
-                  Text(state.counterModel.name, style: theme.textTheme.caption),
-                ],
+            return const Center(child: CustomLoadingIndicator());
+          }
+          if (state is EditCounterData) {
+            final counterModel = state.counterModel;
+
+            return SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    const SizedBox(height: 40),
+                    CounterValueIndicator(value: counterModel?.value),
+                    const SizedBox(height: 80),
+                    Center(
+                      child: FractionallySizedBox(
+                        widthFactor: 0.8,
+                        child: Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              NameInput(nameController: nameController),
+                              const SizedBox(height: 20),
+                              GoalInput(goalController: goalController)
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             );
-          } else if (state is EditCounterError) {
-            return ErrorMessage(error: state.error);
           }
-          return const SizedBox();
+          if (state is EditCounterError) {
+            return Center(child: ErrorMessage(error: state.error));
+          }
+          return const SizedBox.shrink();
         },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40.0),
-        child: BlocBuilder<EditCounterBloc, EditCounterState>(
-          builder: (context, state) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                CustomCircularButton(
-                  icon: Icons.remove,
-                  onPressed: state is EditCounterData
-                      ? () => editCounterBloc.add(CounterDecrementPressed(state.counterModel))
-                      : null,
-                ),
-                CustomCircularButton(
-                  icon: Icons.add,
-                  onPressed: state is EditCounterData
-                      ? () => editCounterBloc.add(CounterIncrementPressed(state.counterModel))
-                      : null,
-                ),
-              ],
-            );
-          },
-        ),
       ),
     );
   }

@@ -15,5 +15,25 @@
     "english": "English",
     "@english": {
       "description": "Language name: English"
+    },
+    "create": "Create",
+    "@create": {
+      "description": "Title of the create counter dialog"
+    },
+    "setName": "Set a name",
+    "@setName": {
+      "description": "Set a counter name"
+    },
+    "setGoal": "Set a goal",
+    "@setGoal": {
+      "description": "Set a counter goal (optional)"
+    },
+    "enterValidNumber": "Please enter a valid number",
+    "@enterValidNumber": {
+      "description": "Error message when the user enters a invalid number"
+    },
+    "enterPositiveNumber": "Please enter a positive number",
+    "@enterPositiveNumber": {
+      "description": "Error message when the user enters a negative number"
     }
 }
