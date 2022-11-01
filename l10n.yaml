@@ -1,0 +1,4 @@
+arb-dir: lib/src/core/localization # Where to find translation files
+template-arb-file: app_en.arb # Which translation is the default/template
+output-localization-file: app_localizations.dart # What to call generated dart files
+nullable-getter: false
