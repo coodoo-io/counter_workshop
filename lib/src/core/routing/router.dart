@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
-  urlPathStrategy: UrlPathStrategy.path,
   debugLogDiagnostics: false, // Logs werden durch den Logger übernommen
   initialLocation: '/counters',
   routes: [
@@ -23,7 +22,7 @@ final router = GoRouter(
         GoRoute(
           path: ':id',
           builder: (context, state) {
-            final counterId = state.params['id'];
+            final counterId = state.pathParameters['id'];
             return EditCounterPage(counterId: counterId!);
           },
         ),
