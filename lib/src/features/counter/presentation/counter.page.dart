@@ -24,9 +24,17 @@ class _CounterPageState extends State<CounterPage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      counterController.decrement();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text('Counter Page'),
       ),
@@ -34,20 +42,51 @@ class _CounterPageState extends State<CounterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
               '${counterController.counterModel.value}',
-              style: Theme.of(context).textTheme.headline4,
+              style: theme.textTheme.headlineLarge,
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 40.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            _CustomCircularButton(
+              icon: Icons.remove,
+              onPressed: _decrementCounter,
+            ),
+            _CustomCircularButton(
+              icon: Icons.add,
+              onPressed: _incrementCounter,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomCircularButton extends StatelessWidget {
+  const _CustomCircularButton({required this.icon, this.onPressed});
+
+  final IconData icon;
+  final Function()? onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+        shape: const CircleBorder(),
+        padding: const EdgeInsets.all(15),
+      ),
+      onPressed: onPressed,
+      child: Icon(
+        icon,
+        size: 50,
       ),
     );
   }

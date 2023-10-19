@@ -26,9 +26,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: VarelaRound
+      fonts:
+        - asset: assets/fonts/VarelaRound-Regular.ttf
+
   assets:
     - assets/images/ # .png/.jpg images
     - assets/icons/ # .svg icons
     - assets/fonts/ # Custom Fonts
     - assets/launcher_icon/ # App icon image to generate from
-
