@@ -7,9 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
   final CounterRepository counterRepository;
 
-  CounterBloc({required this.counterRepository}) : super(const CounterState(value: 0)) {
+  CounterBloc({required this.counterRepository})
+      : super(const CounterState(value: 0)) {
     on<CounterIncrementPressed>(_onIncrement);
     on<CounterDecrementPressed>(_onDecrement);
+    on<CounterReset>(_onCounterReset);
   }
 
   void _onIncrement(CounterIncrementPressed event, Emitter<CounterState> emit) {
@@ -22,5 +24,9 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     if (state.value > 0) {
       emit(CounterState(value: state.value - 1));
     }
+  }
+
+  void _onCounterReset(CounterReset event, Emitter<CounterState> emit) {
+    emit(const CounterState(value: 0));
   }
 }

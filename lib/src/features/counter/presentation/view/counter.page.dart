@@ -13,7 +13,9 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterRepository = context.read<CounterRepository>();
-    return BlocProvider(create: (_) => CounterBloc(counterRepository: counterRepository), child: const _CounterView());
+    return BlocProvider(
+        create: (_) => CounterBloc(counterRepository: counterRepository),
+        child: const _CounterView());
   }
 }
 
@@ -47,6 +49,10 @@ class _CounterView extends StatelessWidget {
             CustomCircularButton(
               icon: Icons.remove,
               onPressed: () => counterBloc.add(CounterDecrementPressed()),
+            ),
+            CustomCircularButton(
+              icon: Icons.reset_tv,
+              onPressed: () => counterBloc.add(CounterReset()),
             ),
             CustomCircularButton(
               icon: Icons.add,
