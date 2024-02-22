@@ -1,4 +1,6 @@
 import 'package:counter/data/counter/counter.repository.dart';
+import 'package:counter/presentation/counter/counter.bloc.screen.dart';
+import 'package:counter/presentation/counter/counter.riverpod.screen.dart';
 import 'package:counter/presentation/counter/counter.screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,10 +18,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
         useMaterial3: true,
       ),
-      home: CounterPage(
-        title: 'Flutter Demo Home Page',
-        counterRepository: counterRepository,
-      ),
+      home: CounterRiverpodScreen(),
     );
   }
 }
